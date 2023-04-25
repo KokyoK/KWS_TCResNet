@@ -48,7 +48,6 @@ class S2_Block(nn.Module):
         identity = self.conv_res(x)
         identity = self.bn_res(identity)
         identity = F.relu(identity)
-
         out += identity
         out = F.relu(out)
 
@@ -73,27 +72,50 @@ class TCResNet8(nn.Module):
 
         # S2 Blocks
         self.s2_block0 = S2_Block(int(16 * k), int(24 * k))
+        self.s2_block0_speaker = S2_Block(int(16 * k), int(24 * k))
+
         self.s2_block1 = S2_Block(int(24 * k), int(32 * k))
+        self.s2_block1_speaker = S2_Block(int(24 * k), int(32 * k))
+
         self.s2_block2 = S2_Block(int(32 * k), int(48 * k))
+        self.s2_block2_speaker = S2_Block(int(32 * k), int(48 * k))
 
         # Features are [batch x 48*k channels x 1 x 13] at this point
         self.avg_pool = nn.AvgPool2d(kernel_size=(1, 13), stride=1)
         self.fc = nn.Conv2d(in_channels=int(48 * k), out_channels=n_classes, kernel_size=1, padding=0,
+                            bias=False)
+        self.fc_s = nn.Conv2d(in_channels=int(48 * k), out_channels=37, kernel_size=1, padding=0,
                             bias=False)
 
     def forward(self, x):
         # print("nn input shape: ",x.shape)
         out = self.conv_block(x)
 
-        out = self.s2_block0(out)
-        out = self.s2_block1(out)
-        out = self.s2_block2(out)
+        out_inter = self.s2_block0(out)
 
-        out = self.avg_pool(out)
+
+        #### keyword recog
+        out = self.s2_block1(out_inter)
+        k_map = self.s2_block2(out)
+        out = self.avg_pool(k_map)
         out = self.fc(out)
         out = F.softmax(out, dim=1)
+        out_k = out.view(out.shape[0], -1)
 
-        return out.view(out.shape[0], -1)
+        #### speaker recog
+        with torch.no_grad():
+            out = self.conv_block(x)
+            out_inter = self.s2_block0(out)
+
+        out_s = self.s2_block1_speaker(out_inter)
+        s_map = self.s2_block2_speaker(out_s)
+        out_s = self.avg_pool(s_map)
+        out_s = self.fc_s(out_s)
+        out_s = F.softmax(out_s, dim=1)
+        out_s = out_s.view(out_s.shape[0], -1)
+
+        return out_k,out_s ,k_map,s_map
+
 
     def save(self, is_onnx=0, name="TCResNet8"):
         if (is_onnx):

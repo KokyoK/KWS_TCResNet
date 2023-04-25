@@ -76,8 +76,16 @@ def split_dataset(root_dir, word_list, split_pct=[0.8, 0.1, 0.1]):
     available_words = os.listdir(root_dir)      # 列出原数据集的words
     for i, word in enumerate(available_words):
         if (word in word_list):
-            temp_set = [(root_dir + word + "/" + wav_file, word) for wav_file in os.listdir(root_dir + word) \
-                        if wav_file.endswith(".wav")]       # @TODO: FIX ME
+            temp_set=[]
+            for wav_file in os.listdir(root_dir + word):
+                if wav_file.endswith(".wav"):
+                    id = wav_file.split("_",1)[0]
+                    temp_set.append((root_dir + word + "/" + wav_file, word,id))
+                    #             if wav_file.endswith(".wav")]
+            # temp_set = [(root_dir + word + "/" + wav_file, word) for wav_file in os.listdir(root_dir + word) \
+            #             if wav_file.endswith(".wav")]
+            # for i in range(len_temp_set):
+            #     for wav_file in os.listdir(root_dir + word)
 
             n_samples = len(temp_set)
             n_train = int(n_samples * split_pct[0])
@@ -136,7 +144,7 @@ def split_dataset(root_dir, word_list, split_pct=[0.8, 0.1, 0.1]):
 
 class SpeechDataset(data.Dataset):
 
-    def __init__(self, data_list, dataset_type, transforms, word_list, is_noisy=False, is_shift=False,
+    def __init__(self, data_list, dataset_type, transforms, word_list, speaker_list, is_noisy=False, is_shift=False,
                  sample_length=16000):
         """ types include [TRAIN, DEV, TEST] """
         self.data_list = data_list
@@ -146,6 +154,7 @@ class SpeechDataset(data.Dataset):
         self.sample_length = sample_length
         self.transforms = transforms
         self.word_list = word_list
+        self.speaker_list = speaker_list
 
     def shift_audio(self, audio_data, max_shift=160):
         """ Shifts audio.
@@ -193,7 +202,7 @@ class SpeechDataset(data.Dataset):
         if self.is_noisy:
             out_data += 0.01 * torch.randn(out_data.shape)
         
-        return (out_data, data_element[1])
+        return (out_data, data_element[1],data_element[2])
 
 
 
@@ -204,7 +213,7 @@ class SpeechDataset(data.Dataset):
     def __getitem__(self, idx):
         # print(self.data_list[idx])
         cur_element = self.load_data(self.data_list[idx])
-        cur_element = (cur_element[0], self.word_list.index(cur_element[1]))
+        cur_element = (cur_element[0], self.word_list.index(cur_element[1]), self.speaker_list.index(cur_element[2]))
         return self.transforms(cur_element)
 
 
@@ -251,25 +260,29 @@ class AudioPreprocessor():
         # Set Filters as channels
         o_data = o_data.view(o_data.shape[1], o_data.shape[0], o_data.shape[2])
         # print(o_data.shape,data[1])
-        return o_data, data[1]
+        return o_data, data[1],data[2]
 
 
 if __name__ == "__main__":
     # Test example
     # root_dir = "dataset/lege/"
     # word_list = ['上升', '下降', '乐歌', '停止', '升高', '坐', '复位', '小乐', '站', '降低']
-    root_dir = "dataset/google_origin/"
-    word_list = ["yes", "no", "up", "down", "left", "right", "on", "off", "stop", "go", "silence"]
+    # root_dir = "dataset/google_origin/"
+    # word_list = ["yes", "no", "up", "down", "left", "right", "on", "off", "stop", "go", "silence"]
+    root_dir = "dataset/huawei_modify/WAV_new/"
+    word_list = ['hey_celia', '支付宝扫一扫', '停止播放', '下一首', '播放音乐', '微信支付', '关闭降噪', '小艺小艺', '调小音量', '开启透传']
+    speaker_list = [speaker for speaker in os.listdir("dataset/huawei_modify/WAV/") if speaker.startswith("A") ]
+
     
     ap = AudioPreprocessor()
     train, dev, test = split_dataset(root_dir, word_list)
 
     # Dataset
-    train_data = SpeechDataset(test, "train", ap, word_list)
-    dev_data = SpeechDataset(test, "train", ap, word_list)
-    test_data = SpeechDataset(test, "train", ap, word_list)
+    train_data = SpeechDataset(test, "train", ap, word_list,speaker_list)
+    dev_data = SpeechDataset(test, "train", ap, word_list,speaker_list)
+    test_data = SpeechDataset(test, "train", ap, word_list,speaker_list)
     # Dataloaders
-    train_dataloader = data.DataLoader(train_data, batch_size=64, shuffle=False)
+    train_dataloader = data.DataLoader(train_data, batch_size=1, shuffle=False)
     dev_dataloader = data.DataLoader(dev_data, batch_size=1, shuffle=False)
     test_dataloader = data.DataLoader(test_data, batch_size=1, shuffle=False)
     # Dataloader tests
@@ -281,19 +294,21 @@ if __name__ == "__main__":
 
     Bar = enumerate(train_dataloader)
     # print(len()
-    for i, (train_spectrogram, train_labels) in Bar:
+    for i, data in Bar:
+        # print(train_labels,id)
+        # print(data)
         # if train_spectrogram.shape !=
         # train_spectrogram, train_labels = next(iter(train_dataloader))
-        train_spectrogram, train_labels = np.array(train_spectrogram), np.array(train_labels)
-        np.save('feature.npy', train_spectrogram)
-        np.save('label.npy', train_labels)
-        print(train_spectrogram.shape,train_labels.shape)
-        print(train_labels)
-        break
+        # train_spectrogram, train_labels = np.array(train_spectrogram), np.array(train_labels)
+        # np.save('feature.npy', train_spectrogram)
+        # np.save('label.npy', train_labels)
+        # print(train_spectrogram.shape,train_labels.shape)
+        # print(train_labels)
+        # break
         # print(train_spectrogram.shape)
         # train_spectrogram, train_labels = next(iter(train_dataloader))
         # print(train_spectrogram.shape,train_labels.shape)
-        # break
+        break
 
 
 
