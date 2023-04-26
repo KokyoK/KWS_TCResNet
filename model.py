@@ -82,9 +82,9 @@ class TCResNet8(nn.Module):
 
         # Features are [batch x 48*k channels x 1 x 13] at this point
         self.avg_pool = nn.AvgPool2d(kernel_size=(1, 13), stride=1)
-        self.fc = nn.Conv2d(in_channels=int(48 * k), out_channels=n_classes, kernel_size=1, padding=0,
+        self.fc = nn.Conv2d(in_channels=int(48 * k), out_channels=10, kernel_size=1, padding=0,
                             bias=False)
-        self.fc_s = nn.Conv2d(in_channels=int(48 * k), out_channels=37, kernel_size=1, padding=0,
+        self.fc_s = nn.Conv2d(in_channels=int(48 * k), out_channels=1481, kernel_size=1, padding=0,
                             bias=False)
 
     def forward(self, x):

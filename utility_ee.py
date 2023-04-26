@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.utils.data as data
 import speech_dataset as sd
 import model as md
-
+import torch.nn.functional as F
 # check if CUDA is available
 train_on_gpu = torch.cuda.is_available()
 time_check = True
@@ -75,8 +75,18 @@ class OrgLoss(nn.Module):
 
 
     def forward(self, map_k, map_s):
+        mul = torch.matmul(map_k.squeeze(), map_s.squeeze().permute(0,2,1))
+        # 将两个张量 reshape 为2维矩阵，形状为 (batch_size * height * width, length)
+        # tensor1_2d = map_s.reshape(-1, map_s.size(-1))
+        # tensor2_2d = map_k.reshape(-1, map_k.size(-1))
+        o_loss = torch.norm(mul, p='fro') / (48*48*16)
+        # 计算两个矩阵的乘积，并计算其 Frobenius 范数
+        # o_loss = torch.norm(torch.bmm(tensor1_2d.permute(1, 0).unsqueeze(-1), tensor2_2d.permute(1, 0).unsqueeze(0)),
+        #                        p='fro')
 
-        o_loss = torch.norm(torch.matmul(map_k.squeeze(), map_s.squeeze().permute(0,2,1)), p='fro')
+        # o_loss = 100 / torch.norm(mul, p='fro')
+        # I = torch.diagflat(mul)
+
         return o_loss
 
 def train(model, root_dir, word_list, speaker_list,num_epoch):
@@ -90,7 +100,7 @@ def train(model, root_dir, word_list, speaker_list,num_epoch):
     
     # Loading dataset
     ap = sd.AudioPreprocessor() # Computes Log-Mel spectrogram
-    train_files, dev_files, test_files = sd.split_dataset(root_dir, word_list, )
+    train_files, dev_files, test_files = sd.split_dataset(root_dir, word_list, speaker_list)
 
     train_data = sd.SpeechDataset(train_files, "train", ap, word_list,speaker_list)
     dev_data = sd.SpeechDataset(dev_files, "dev", ap, word_list,speaker_list)
@@ -103,7 +113,7 @@ def train(model, root_dir, word_list, speaker_list,num_epoch):
 
     criterion = nn.CrossEntropyLoss()
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-4,weight_decay=0)
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-4,weight_decay=1e-6)
     OLoss = OrgLoss()
     # Training
     step_idx = 0

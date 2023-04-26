@@ -18,6 +18,21 @@ import math
 
 # if torch.cuda.is_available():
 #     torch.cuda.set_device(geforce_rtx_3060_xc)
+def fetch_speaker_list(ROOT_DIR, WORD_LIST):
+    speaker_list = []
+    if ROOT_DIR == "dataset/huawei_modify/WAV_new/":
+        return [speaker for speaker in os.listdir("dataset/huawei_modify/WAV/") if speaker.startswith("A")]
+    elif ROOT_DIR == "dataset/google_origin/":
+        available_words = os.listdir(ROOT_DIR)  # 列出原数据集的words
+        for i, word in enumerate(available_words):
+            if (word in WORD_LIST):
+                for wav_file in os.listdir(ROOT_DIR + word):
+                    if wav_file.endswith(".wav"):
+                        id = wav_file.split("_", 1)[0]
+                        if (id not in speaker_list):
+                            speaker_list.append(id)
+        return speaker_list
+
 
 def print_spectrogram(spectrogram, labels, word_list):
     """ Prints spectrogram to screen. Used for debugging.
@@ -43,7 +58,7 @@ def get_all_data_length(root_dir):          # for debug
 
 
 
-def split_dataset(root_dir, word_list, split_pct=[0.8, 0.1, 0.1]):
+def split_dataset(root_dir, word_list, speaker_list, split_pct=[0.8, 0.1, 0.1]):
     """ Generates a list of paths for each sample and splits them into training, validation and test sets.
 
         Input(s):
@@ -76,29 +91,26 @@ def split_dataset(root_dir, word_list, split_pct=[0.8, 0.1, 0.1]):
     available_words = os.listdir(root_dir)      # 列出原数据集的words
     for i, word in enumerate(available_words):
         if (word in word_list):
-            temp_set=[]
-            for wav_file in os.listdir(root_dir + word):
-                if wav_file.endswith(".wav"):
-                    id = wav_file.split("_",1)[0]
-                    temp_set.append((root_dir + word + "/" + wav_file, word,id))
-                    #             if wav_file.endswith(".wav")]
-            # temp_set = [(root_dir + word + "/" + wav_file, word) for wav_file in os.listdir(root_dir + word) \
-            #             if wav_file.endswith(".wav")]
-            # for i in range(len_temp_set):
-            #     for wav_file in os.listdir(root_dir + word)
+            for speaker in speaker_list:
+                temp_set = []
+                for wav_file in os.listdir(root_dir + word):
+                    if wav_file.endswith(".wav"):
+                        id = wav_file.split("_",1)[0]
+                        if (id == speaker):
+                            temp_set.append((root_dir + word + "/" + wav_file, word,id))
 
-            n_samples = len(temp_set)
-            n_train = int(n_samples * split_pct[0])
-            n_dev = int(n_samples * split_pct[1])
+                n_samples = len(temp_set)
+                n_train = int(n_samples * split_pct[0])
+                n_dev = int(n_samples * split_pct[1])
             # If word samples are insufficient, re-use same data multiple times.
             # This isn't ideal since validation/test sets might contain data from the training set.
             # if (len(temp_set) < n_samples):
             #     temp_set *= math.ceil(n_samples / len(temp_set))
-            temp_set = temp_set[:n_samples]
-            random.shuffle(temp_set)
-            train_set += temp_set[:n_train]
-            dev_set += temp_set[n_train:n_train + n_dev]
-            test_set += temp_set[n_train + n_dev:]
+                temp_set = temp_set[:n_samples]
+                random.shuffle(temp_set)
+                train_set += temp_set[:n_train]
+                dev_set += temp_set[n_train:n_train + n_dev]
+                test_set += temp_set[n_train + n_dev:]
 
         elif ((word != "_background_noise_") and ("unknown" in word_list)):  # Adding unknown words
             if os.path.isdir(root_dir + word):  # 排除缓存文件e.g. .DS_Store
@@ -171,7 +183,7 @@ class SpeechDataset(data.Dataset):
         """ Loads audio, shifts data and adds noise. """
         # print(data_element)
         wav_data = torchaudio.load(data_element[0])[0]
-        wav_data = F_audio.resample(wav_data, 16000, 8000)  # @NOTE: 下采样到8000，部署的时候改原采样率
+        wav_data = F_audio.resample(wav_data, 48000, 8000)  # @NOTE: 下采样到8000，部署的时候改原采样率
 
         # Background noise used for silence needs to be shortened to 1 second.
         if (data_element[1] == "silence"):
@@ -183,7 +195,7 @@ class SpeechDataset(data.Dataset):
         # print(out_data.shape)
         
        
-        data_len = 16000
+        data_len = 24000
         # Pad smaller audio files with zeros to reach 1 second (16_000 samples)
         if (out_data.shape[1] < data_len):
             out_data = F.pad(out_data, pad=(0, (data_len - out_data.shape[1])), mode='constant', value=0)
@@ -236,7 +248,7 @@ class AudioPreprocessor():
 
         self.mfcc = nn.Sequential(
             torchaudio.transforms.MFCC(
-                sample_rate=16000,
+                sample_rate=24000,
                 n_mfcc=40,
                 dct_type=2,
                 norm='ortho',
@@ -275,11 +287,11 @@ if __name__ == "__main__":
 
     
     ap = AudioPreprocessor()
-    train, dev, test = split_dataset(root_dir, word_list)
+    train, dev, test = split_dataset(root_dir, word_list, speaker_list)
 
     # Dataset
-    train_data = SpeechDataset(test, "train", ap, word_list,speaker_list)
-    dev_data = SpeechDataset(test, "train", ap, word_list,speaker_list)
+    train_data = SpeechDataset(train, "train", ap, word_list,speaker_list)
+    dev_data = SpeechDataset(dev, "train", ap, word_list,speaker_list)
     test_data = SpeechDataset(test, "train", ap, word_list,speaker_list)
     # Dataloaders
     train_dataloader = data.DataLoader(train_data, batch_size=1, shuffle=False)
@@ -296,7 +308,7 @@ if __name__ == "__main__":
     # print(len()
     for i, data in Bar:
         # print(train_labels,id)
-        # print(data)
+        print(data)
         # if train_spectrogram.shape !=
         # train_spectrogram, train_labels = next(iter(train_dataloader))
         # train_spectrogram, train_labels = np.array(train_spectrogram), np.array(train_labels)
