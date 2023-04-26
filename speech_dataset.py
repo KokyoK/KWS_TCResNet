@@ -58,7 +58,8 @@ def get_all_data_length(root_dir):          # for debug
 
 
 
-def split_dataset(root_dir, word_list, speaker_list, split_pct=[0.8, 0.1, 0.1]):
+
+def split_dataset(root_dir, word_list, speaker_list, split_pct=[0.9, 0.1, 0]):
     """ Generates a list of paths for each sample and splits them into training, validation and test sets.
 
         Input(s):

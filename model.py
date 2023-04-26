@@ -89,12 +89,12 @@ class TCResNet8(nn.Module):
 
     def forward(self, x):
         # print("nn input shape: ",x.shape)
-        out = self.conv_block(x)
+        
 
-        out_inter = self.s2_block0(out)
-
-
-        #### keyword recog
+        with torch.no_grad():
+            out = self.conv_block(x)
+            out_inter = self.s2_block0(out)
+        #### keyword recog    
         out = self.s2_block1(out_inter)
         k_map = self.s2_block2(out)
         out = self.avg_pool(k_map)
@@ -103,11 +103,11 @@ class TCResNet8(nn.Module):
         out_k = out.view(out.shape[0], -1)
 
         #### speaker recog
-        with torch.no_grad():
-            out = self.conv_block(x)
-            out_inter = self.s2_block0(out)
+        
+        out_i = self.conv_block(x)
+        out_i = self.s2_block0(out_i)
 
-        out_s = self.s2_block1_speaker(out_inter)
+        out_s = self.s2_block1_speaker(out_i)
         s_map = self.s2_block2_speaker(out_s)
         out_s = self.avg_pool(s_map)
         out_s = self.fc_s(out_s)

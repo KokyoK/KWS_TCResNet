@@ -18,12 +18,8 @@ SPEAKER_LIST = sd.fetch_speaker_list(ROOT_DIR, WORD_LIST)
 # SPEAKER_LIST = [speaker for speaker in os.listdir("dataset/huawei_modify/WAV/") if speaker.startswith("A")]
 # ROOT_DIR = "dataset/lege/"
 # WORD_LIST = ['上升', '下降', '乐歌', '停止', '升高', '坐', '复位', '小乐', '站', '降低']
-NUM_EPOCH = 500
 
-
-
-
-
+NUM_EPOCH = 2000
 
 
 if __name__ == "__main__":
