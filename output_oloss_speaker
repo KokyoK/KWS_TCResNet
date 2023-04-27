@@ -10133,3 +10133,620 @@ Epoch 281 | Train step #87802   | Loss_ALL: 7.9823 | Loss Otho 0.0000  | KWS ACC
 Epoch 281 | Train step #87812   | Loss_ALL: 7.9631 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
 Epoch 281 | Train step #87822   | Loss_ALL: 7.9746 | Loss Otho 0.0004  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
 Epoch 281 | Train step #87832   | Loss_ALL: 7.9626 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 281 | Train step #87842   | Loss_ALL: 8.0201 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 281 | Train step #87852   | Loss_ALL: 7.9642 | Loss Otho 0.0004  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 281 | Train step #87862   | Loss_ALL: 7.9708 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 281 | Train step #87872   | Loss_ALL: 7.9617 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 281 | Train step #87882   | Loss_ALL: 7.9676 | Loss Otho 0.0005  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 281 | Train step #87892   | Loss_ALL: 7.9653 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 281 | Train step #87902   | Loss_ALL: 7.9630 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 281 | Train step #87912   | Loss_ALL: 7.9626 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 281 | Train step #87922   | Loss_ALL: 7.9627 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 281 | Train step #87932   | Loss_ALL: 7.9630 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 281 | Train step #87942   | Loss_ALL: 7.9639 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 281 | Eval  step #87949   | Loss: 8.0859  | KWS ACC: 0.8750 | SPEAKER ACC: 0.5000 
+Epoch 281 | Eval  step #87959   | Loss: 7.9631  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 281 | Eval  step #87969   | Loss: 7.9716  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 281 | Eval  step #87979   | Loss: 7.9785  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+===========================================================================
+EPOCH #281     | TRAIN KWS ACC: 95.39% | TRAIN SPEAKER ACC: 32.05% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  91.61% | VAL   SPEAKER ACC: 28.28% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 282 | Train step #87984   | Loss_ALL: 7.9623 | Loss Otho 0.0006  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 282 | Train step #87994   | Loss_ALL: 7.9632 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5625 
+Epoch 282 | Train step #88004   | Loss_ALL: 7.9814 | Loss Otho 0.0000  | KWS ACC: 0.8125 | SPEAKER ACC: 0.3750 
+Epoch 282 | Train step #88014   | Loss_ALL: 7.9660 | Loss Otho 0.0007  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 282 | Train step #88024   | Loss_ALL: 7.9654 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.0625 
+Epoch 282 | Train step #88034   | Loss_ALL: 7.9675 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 282 | Train step #88044   | Loss_ALL: 7.9751 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 282 | Train step #88054   | Loss_ALL: 7.9636 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 282 | Train step #88064   | Loss_ALL: 7.9658 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 282 | Train step #88074   | Loss_ALL: 7.9624 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 282 | Train step #88084   | Loss_ALL: 7.9645 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 282 | Train step #88094   | Loss_ALL: 7.9631 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 282 | Train step #88104   | Loss_ALL: 7.9638 | Loss Otho 0.0020  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 282 | Train step #88114   | Loss_ALL: 7.9636 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 282 | Train step #88124   | Loss_ALL: 7.9716 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 282 | Train step #88134   | Loss_ALL: 7.9614 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 282 | Train step #88144   | Loss_ALL: 7.9646 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 282 | Train step #88154   | Loss_ALL: 8.0006 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 282 | Train step #88164   | Loss_ALL: 7.9635 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 282 | Train step #88174   | Loss_ALL: 7.9689 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 282 | Train step #88184   | Loss_ALL: 7.9640 | Loss Otho 0.0006  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 282 | Train step #88194   | Loss_ALL: 7.9611 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 282 | Train step #88204   | Loss_ALL: 7.9627 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 282 | Train step #88214   | Loss_ALL: 7.9735 | Loss Otho 0.0007  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 282 | Train step #88224   | Loss_ALL: 7.9612 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 282 | Train step #88234   | Loss_ALL: 7.9624 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 282 | Train step #88244   | Loss_ALL: 7.9632 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 282 | Train step #88254   | Loss_ALL: 7.9634 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 282 | Eval  step #88261   | Loss: 7.9675  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 282 | Eval  step #88271   | Loss: 7.9698  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 282 | Eval  step #88281   | Loss: 7.9883  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 282 | Eval  step #88291   | Loss: 8.0179  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+===========================================================================
+EPOCH #282     | TRAIN KWS ACC: 95.95% | TRAIN SPEAKER ACC: 30.72% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  91.06% | VAL   SPEAKER ACC: 27.74% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 283 | Train step #88296   | Loss_ALL: 7.9632 | Loss Otho 0.0006  | KWS ACC: 0.8750 | SPEAKER ACC: 0.5000 
+Epoch 283 | Train step #88306   | Loss_ALL: 7.9662 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 283 | Train step #88316   | Loss_ALL: 7.9676 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 283 | Train step #88326   | Loss_ALL: 7.9625 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 283 | Train step #88336   | Loss_ALL: 7.9616 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 283 | Train step #88346   | Loss_ALL: 7.9650 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 283 | Train step #88356   | Loss_ALL: 7.9621 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.6875 
+Epoch 283 | Train step #88366   | Loss_ALL: 7.9633 | Loss Otho 0.0003  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1875 
+Epoch 283 | Train step #88376   | Loss_ALL: 7.9635 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.0625 
+Epoch 283 | Train step #88386   | Loss_ALL: 7.9628 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 283 | Train step #88396   | Loss_ALL: 7.9632 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 283 | Train step #88406   | Loss_ALL: 7.9629 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 283 | Train step #88416   | Loss_ALL: 7.9638 | Loss Otho 0.0004  | KWS ACC: 0.9375 | SPEAKER ACC: 0.0000 
+Epoch 283 | Train step #88426   | Loss_ALL: 7.9653 | Loss Otho 0.0002  | KWS ACC: 0.8750 | SPEAKER ACC: 0.0625 
+Epoch 283 | Train step #88436   | Loss_ALL: 7.9610 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 283 | Train step #88446   | Loss_ALL: 7.9642 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 283 | Train step #88456   | Loss_ALL: 7.9623 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 283 | Train step #88466   | Loss_ALL: 7.9630 | Loss Otho 0.0006  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 283 | Train step #88476   | Loss_ALL: 7.9621 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 283 | Train step #88486   | Loss_ALL: 7.9640 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 283 | Train step #88496   | Loss_ALL: 8.0667 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.0625 
+Epoch 283 | Train step #88506   | Loss_ALL: 7.9619 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 283 | Train step #88516   | Loss_ALL: 7.9680 | Loss Otho 0.0001  | KWS ACC: 0.8125 | SPEAKER ACC: 0.4375 
+Epoch 283 | Train step #88526   | Loss_ALL: 7.9648 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 283 | Train step #88536   | Loss_ALL: 7.9603 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 283 | Train step #88546   | Loss_ALL: 8.0261 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 283 | Train step #88556   | Loss_ALL: 7.9641 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 283 | Train step #88566   | Loss_ALL: 7.9660 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 283 | Eval  step #88573   | Loss: 8.1633  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1875 
+Epoch 283 | Eval  step #88583   | Loss: 7.9854  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 283 | Eval  step #88593   | Loss: 8.0626  | KWS ACC: 0.8125 | SPEAKER ACC: 0.1875 
+Epoch 283 | Eval  step #88603   | Loss: 8.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+===========================================================================
+EPOCH #283     | TRAIN KWS ACC: 95.59% | TRAIN SPEAKER ACC: 31.42% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  92.70% | VAL   SPEAKER ACC: 30.11% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 284 | Train step #88608   | Loss_ALL: 7.9626 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 284 | Train step #88618   | Loss_ALL: 7.9611 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.6250 
+Epoch 284 | Train step #88628   | Loss_ALL: 7.9667 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 284 | Train step #88638   | Loss_ALL: 7.9634 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.6250 
+Epoch 284 | Train step #88648   | Loss_ALL: 7.9667 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 284 | Train step #88658   | Loss_ALL: 7.9616 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 284 | Train step #88668   | Loss_ALL: 7.9628 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 284 | Train step #88678   | Loss_ALL: 7.9645 | Loss Otho 0.0005  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 284 | Train step #88688   | Loss_ALL: 7.9617 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.0625 
+Epoch 284 | Train step #88698   | Loss_ALL: 7.9598 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 284 | Train step #88708   | Loss_ALL: 7.9642 | Loss Otho 0.0009  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 284 | Train step #88718   | Loss_ALL: 7.9626 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 284 | Train step #88728   | Loss_ALL: 7.9818 | Loss Otho 0.0000  | KWS ACC: 0.7500 | SPEAKER ACC: 0.4375 
+Epoch 284 | Train step #88738   | Loss_ALL: 7.9679 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 284 | Train step #88748   | Loss_ALL: 7.9707 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 284 | Train step #88758   | Loss_ALL: 7.9641 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 284 | Train step #88768   | Loss_ALL: 7.9641 | Loss Otho 0.0004  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 284 | Train step #88778   | Loss_ALL: 7.9629 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 284 | Train step #88788   | Loss_ALL: 7.9694 | Loss Otho 0.0012  | KWS ACC: 0.8125 | SPEAKER ACC: 0.1250 
+Epoch 284 | Train step #88798   | Loss_ALL: 7.9656 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 284 | Train step #88808   | Loss_ALL: 7.9646 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 284 | Train step #88818   | Loss_ALL: 7.9630 | Loss Otho 0.0010  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 284 | Train step #88828   | Loss_ALL: 7.9644 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 284 | Train step #88838   | Loss_ALL: 7.9641 | Loss Otho 0.0006  | KWS ACC: 0.8125 | SPEAKER ACC: 0.5000 
+Epoch 284 | Train step #88848   | Loss_ALL: 7.9658 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 284 | Train step #88858   | Loss_ALL: 7.9654 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5625 
+Epoch 284 | Train step #88868   | Loss_ALL: 7.9691 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 284 | Train step #88878   | Loss_ALL: 7.9663 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 284 | Eval  step #88885   | Loss: 8.1323  | KWS ACC: 0.8125 | SPEAKER ACC: 0.1875 
+Epoch 284 | Eval  step #88895   | Loss: 8.0330  | KWS ACC: 0.8125 | SPEAKER ACC: 0.3750 
+Epoch 284 | Eval  step #88905   | Loss: 8.0165  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 284 | Eval  step #88915   | Loss: 7.9711  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+===========================================================================
+EPOCH #284     | TRAIN KWS ACC: 95.05% | TRAIN SPEAKER ACC: 33.86% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  90.88% | VAL   SPEAKER ACC: 30.47% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 285 | Train step #88920   | Loss_ALL: 7.9667 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 285 | Train step #88930   | Loss_ALL: 7.9624 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 285 | Train step #88940   | Loss_ALL: 7.9656 | Loss Otho 0.0001  | KWS ACC: 0.8125 | SPEAKER ACC: 0.1250 
+Epoch 285 | Train step #88950   | Loss_ALL: 7.9656 | Loss Otho 0.0006  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 285 | Train step #88960   | Loss_ALL: 7.9626 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 285 | Train step #88970   | Loss_ALL: 7.9630 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5625 
+Epoch 285 | Train step #88980   | Loss_ALL: 7.9682 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 285 | Train step #88990   | Loss_ALL: 7.9693 | Loss Otho 0.0008  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 285 | Train step #89000   | Loss_ALL: 7.9684 | Loss Otho 0.0001  | KWS ACC: 0.8125 | SPEAKER ACC: 0.3750 
+Epoch 285 | Train step #89010   | Loss_ALL: 7.9641 | Loss Otho 0.0006  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 285 | Train step #89020   | Loss_ALL: 7.9645 | Loss Otho 0.0008  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 285 | Train step #89030   | Loss_ALL: 7.9622 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 285 | Train step #89040   | Loss_ALL: 7.9669 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 285 | Train step #89050   | Loss_ALL: 7.9627 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 285 | Train step #89060   | Loss_ALL: 7.9623 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 285 | Train step #89070   | Loss_ALL: 7.9631 | Loss Otho 0.0005  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 285 | Train step #89080   | Loss_ALL: 7.9656 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 285 | Train step #89090   | Loss_ALL: 7.9634 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 285 | Train step #89100   | Loss_ALL: 8.0300 | Loss Otho 0.0002  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 285 | Train step #89110   | Loss_ALL: 7.9643 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 285 | Train step #89120   | Loss_ALL: 7.9679 | Loss Otho 0.0006  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 285 | Train step #89130   | Loss_ALL: 7.9659 | Loss Otho 0.0005  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 285 | Train step #89140   | Loss_ALL: 7.9645 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 285 | Train step #89150   | Loss_ALL: 7.9634 | Loss Otho 0.0014  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5625 
+Epoch 285 | Train step #89160   | Loss_ALL: 7.9648 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 285 | Train step #89170   | Loss_ALL: 7.9675 | Loss Otho 0.0005  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 285 | Train step #89180   | Loss_ALL: 7.9652 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.5000 
+Epoch 285 | Train step #89190   | Loss_ALL: 7.9638 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 285 | Eval  step #89197   | Loss: 8.0605  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 285 | Eval  step #89207   | Loss: 7.9641  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 285 | Eval  step #89217   | Loss: 7.9697  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 285 | Eval  step #89227   | Loss: 7.9702  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+===========================================================================
+EPOCH #285     | TRAIN KWS ACC: 95.63% | TRAIN SPEAKER ACC: 32.68% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  91.06% | VAL   SPEAKER ACC: 32.85% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 286 | Train step #89232   | Loss_ALL: 7.9617 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 286 | Train step #89242   | Loss_ALL: 7.9679 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 286 | Train step #89252   | Loss_ALL: 8.0427 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 286 | Train step #89262   | Loss_ALL: 7.9722 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 286 | Train step #89272   | Loss_ALL: 7.9957 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 286 | Train step #89282   | Loss_ALL: 7.9711 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 286 | Train step #89292   | Loss_ALL: 7.9642 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 286 | Train step #89302   | Loss_ALL: 7.9630 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 286 | Train step #89312   | Loss_ALL: 7.9638 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 286 | Train step #89322   | Loss_ALL: 7.9621 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.4375 
+Epoch 286 | Train step #89332   | Loss_ALL: 7.9629 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 286 | Train step #89342   | Loss_ALL: 7.9659 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 286 | Train step #89352   | Loss_ALL: 7.9773 | Loss Otho 0.0004  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 286 | Train step #89362   | Loss_ALL: 7.9668 | Loss Otho 0.0003  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1250 
+Epoch 286 | Train step #89372   | Loss_ALL: 7.9648 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 286 | Train step #89382   | Loss_ALL: 7.9621 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 286 | Train step #89392   | Loss_ALL: 7.9649 | Loss Otho 0.0001  | KWS ACC: 0.8125 | SPEAKER ACC: 0.3125 
+Epoch 286 | Train step #89402   | Loss_ALL: 7.9826 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 286 | Train step #89412   | Loss_ALL: 7.9639 | Loss Otho 0.0010  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 286 | Train step #89422   | Loss_ALL: 7.9666 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 286 | Train step #89432   | Loss_ALL: 7.9620 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 286 | Train step #89442   | Loss_ALL: 7.9622 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 286 | Train step #89452   | Loss_ALL: 8.0049 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 286 | Train step #89462   | Loss_ALL: 7.9936 | Loss Otho 0.0005  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 286 | Train step #89472   | Loss_ALL: 7.9625 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 286 | Train step #89482   | Loss_ALL: 7.9661 | Loss Otho 0.0005  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 286 | Train step #89492   | Loss_ALL: 7.9689 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 286 | Train step #89502   | Loss_ALL: 7.9648 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 286 | Eval  step #89509   | Loss: 7.9673  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 286 | Eval  step #89519   | Loss: 7.9639  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 286 | Eval  step #89529   | Loss: 8.0437  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 286 | Eval  step #89539   | Loss: 8.1412  | KWS ACC: 0.7500 | SPEAKER ACC: 0.1875 
+===========================================================================
+EPOCH #286     | TRAIN KWS ACC: 95.84% | TRAIN SPEAKER ACC: 31.10% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  92.15% | VAL   SPEAKER ACC: 31.39% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 287 | Train step #89544   | Loss_ALL: 7.9612 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 287 | Train step #89554   | Loss_ALL: 7.9656 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 287 | Train step #89564   | Loss_ALL: 7.9638 | Loss Otho 0.0002  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 287 | Train step #89574   | Loss_ALL: 7.9608 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 287 | Train step #89584   | Loss_ALL: 7.9627 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 287 | Train step #89594   | Loss_ALL: 7.9666 | Loss Otho 0.0020  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 287 | Train step #89604   | Loss_ALL: 7.9672 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 287 | Train step #89614   | Loss_ALL: 7.9640 | Loss Otho 0.0004  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 287 | Train step #89624   | Loss_ALL: 7.9700 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 287 | Train step #89634   | Loss_ALL: 7.9617 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 287 | Train step #89644   | Loss_ALL: 7.9626 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 287 | Train step #89654   | Loss_ALL: 7.9634 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 287 | Train step #89664   | Loss_ALL: 7.9616 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 287 | Train step #89674   | Loss_ALL: 7.9631 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5625 
+Epoch 287 | Train step #89684   | Loss_ALL: 7.9622 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 287 | Train step #89694   | Loss_ALL: 7.9624 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 287 | Train step #89704   | Loss_ALL: 7.9618 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 287 | Train step #89714   | Loss_ALL: 7.9610 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 287 | Train step #89724   | Loss_ALL: 7.9608 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 287 | Train step #89734   | Loss_ALL: 7.9622 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 287 | Train step #89744   | Loss_ALL: 7.9655 | Loss Otho 0.0005  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 287 | Train step #89754   | Loss_ALL: 7.9766 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 287 | Train step #89764   | Loss_ALL: 7.9692 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 287 | Train step #89774   | Loss_ALL: 7.9632 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 287 | Train step #89784   | Loss_ALL: 7.9615 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 287 | Train step #89794   | Loss_ALL: 7.9621 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 287 | Train step #89804   | Loss_ALL: 7.9638 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 287 | Train step #89814   | Loss_ALL: 7.9621 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 287 | Eval  step #89821   | Loss: 8.0153  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 287 | Eval  step #89831   | Loss: 8.0359  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5625 
+Epoch 287 | Eval  step #89841   | Loss: 8.0261  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 287 | Eval  step #89851   | Loss: 7.9701  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+===========================================================================
+EPOCH #287     | TRAIN KWS ACC: 96.61% | TRAIN SPEAKER ACC: 32.64% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  93.61% | VAL   SPEAKER ACC: 29.20% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 288 | Train step #89856   | Loss_ALL: 7.9627 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 288 | Train step #89866   | Loss_ALL: 7.9634 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 288 | Train step #89876   | Loss_ALL: 7.9750 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 288 | Train step #89886   | Loss_ALL: 7.9644 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 288 | Train step #89896   | Loss_ALL: 7.9613 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 288 | Train step #89906   | Loss_ALL: 7.9629 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 288 | Train step #89916   | Loss_ALL: 7.9621 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 288 | Train step #89926   | Loss_ALL: 7.9629 | Loss Otho 0.0004  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 288 | Train step #89936   | Loss_ALL: 7.9619 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.0625 
+Epoch 288 | Train step #89946   | Loss_ALL: 7.9632 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5625 
+Epoch 288 | Train step #89956   | Loss_ALL: 7.9616 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 288 | Train step #89966   | Loss_ALL: 7.9608 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 288 | Train step #89976   | Loss_ALL: 7.9660 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 288 | Train step #89986   | Loss_ALL: 7.9634 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 288 | Train step #89996   | Loss_ALL: 7.9647 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1875 
+Epoch 288 | Train step #90006   | Loss_ALL: 7.9615 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 288 | Train step #90016   | Loss_ALL: 7.9620 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 288 | Train step #90026   | Loss_ALL: 7.9626 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 288 | Train step #90036   | Loss_ALL: 7.9650 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 288 | Train step #90046   | Loss_ALL: 7.9634 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 288 | Train step #90056   | Loss_ALL: 7.9649 | Loss Otho 0.0045  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5625 
+Epoch 288 | Train step #90066   | Loss_ALL: 7.9647 | Loss Otho 0.0004  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 288 | Train step #90076   | Loss_ALL: 7.9638 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 288 | Train step #90086   | Loss_ALL: 7.9656 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 288 | Train step #90096   | Loss_ALL: 7.9619 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 288 | Train step #90106   | Loss_ALL: 7.9621 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 288 | Train step #90116   | Loss_ALL: 7.9639 | Loss Otho 0.0006  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 288 | Train step #90126   | Loss_ALL: 7.9621 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 288 | Eval  step #90133   | Loss: 7.9674  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 288 | Eval  step #90143   | Loss: 7.9694  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 288 | Eval  step #90153   | Loss: 7.9760  | KWS ACC: 0.8125 | SPEAKER ACC: 0.1250 
+Epoch 288 | Eval  step #90163   | Loss: 8.0185  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+===========================================================================
+EPOCH #288     | TRAIN KWS ACC: 96.54% | TRAIN SPEAKER ACC: 32.14% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  93.25% | VAL   SPEAKER ACC: 29.56% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 289 | Train step #90168   | Loss_ALL: 7.9648 | Loss Otho 0.0006  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 289 | Train step #90178   | Loss_ALL: 8.0242 | Loss Otho 0.0005  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 289 | Train step #90188   | Loss_ALL: 7.9676 | Loss Otho 0.0008  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 289 | Train step #90198   | Loss_ALL: 7.9751 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 289 | Train step #90208   | Loss_ALL: 7.9623 | Loss Otho 0.0008  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 289 | Train step #90218   | Loss_ALL: 7.9662 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 289 | Train step #90228   | Loss_ALL: 7.9621 | Loss Otho 0.0015  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 289 | Train step #90238   | Loss_ALL: 7.9639 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 289 | Train step #90248   | Loss_ALL: 7.9626 | Loss Otho 0.0006  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 289 | Train step #90258   | Loss_ALL: 7.9628 | Loss Otho 0.0004  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 289 | Train step #90268   | Loss_ALL: 7.9610 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5625 
+Epoch 289 | Train step #90278   | Loss_ALL: 7.9613 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 289 | Train step #90288   | Loss_ALL: 7.9617 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 289 | Train step #90298   | Loss_ALL: 7.9688 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 289 | Train step #90308   | Loss_ALL: 7.9629 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 289 | Train step #90318   | Loss_ALL: 7.9695 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 289 | Train step #90328   | Loss_ALL: 7.9606 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 289 | Train step #90338   | Loss_ALL: 7.9644 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 289 | Train step #90348   | Loss_ALL: 7.9657 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 289 | Train step #90358   | Loss_ALL: 7.9622 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 289 | Train step #90368   | Loss_ALL: 7.9652 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 289 | Train step #90378   | Loss_ALL: 7.9612 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 289 | Train step #90388   | Loss_ALL: 7.9637 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 289 | Train step #90398   | Loss_ALL: 7.9613 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 289 | Train step #90408   | Loss_ALL: 7.9622 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 289 | Train step #90418   | Loss_ALL: 7.9634 | Loss Otho 0.0000  | KWS ACC: 0.8125 | SPEAKER ACC: 0.1250 
+Epoch 289 | Train step #90428   | Loss_ALL: 7.9625 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 289 | Train step #90438   | Loss_ALL: 7.9657 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 289 | Eval  step #90445   | Loss: 7.9686  | KWS ACC: 0.8750 | SPEAKER ACC: 0.0625 
+Epoch 289 | Eval  step #90455   | Loss: 8.1738  | KWS ACC: 0.8125 | SPEAKER ACC: 0.1875 
+Epoch 289 | Eval  step #90465   | Loss: 7.9630  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 289 | Eval  step #90475   | Loss: 7.9624  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+===========================================================================
+EPOCH #289     | TRAIN KWS ACC: 96.11% | TRAIN SPEAKER ACC: 30.94% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  91.24% | VAL   SPEAKER ACC: 30.47% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 290 | Train step #90480   | Loss_ALL: 7.9627 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 290 | Train step #90490   | Loss_ALL: 7.9644 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 290 | Train step #90500   | Loss_ALL: 7.9654 | Loss Otho 0.0005  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 290 | Train step #90510   | Loss_ALL: 7.9740 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.6250 
+Epoch 290 | Train step #90520   | Loss_ALL: 7.9667 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 290 | Train step #90530   | Loss_ALL: 7.9626 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 290 | Train step #90540   | Loss_ALL: 7.9623 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 290 | Train step #90550   | Loss_ALL: 7.9645 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 290 | Train step #90560   | Loss_ALL: 7.9697 | Loss Otho 0.0003  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1875 
+Epoch 290 | Train step #90570   | Loss_ALL: 7.9636 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1875 
+Epoch 290 | Train step #90580   | Loss_ALL: 7.9618 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 290 | Train step #90590   | Loss_ALL: 7.9666 | Loss Otho 0.0027  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 290 | Train step #90600   | Loss_ALL: 7.9616 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 290 | Train step #90610   | Loss_ALL: 7.9620 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 290 | Train step #90620   | Loss_ALL: 7.9640 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 290 | Train step #90630   | Loss_ALL: 7.9652 | Loss Otho 0.0010  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 290 | Train step #90640   | Loss_ALL: 7.9626 | Loss Otho 0.0018  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 290 | Train step #90650   | Loss_ALL: 7.9635 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 290 | Train step #90660   | Loss_ALL: 7.9617 | Loss Otho 0.0005  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5625 
+Epoch 290 | Train step #90670   | Loss_ALL: 7.9623 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 290 | Train step #90680   | Loss_ALL: 7.9643 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1875 
+Epoch 290 | Train step #90690   | Loss_ALL: 7.9686 | Loss Otho 0.0012  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5625 
+Epoch 290 | Train step #90700   | Loss_ALL: 7.9637 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 290 | Train step #90710   | Loss_ALL: 7.9663 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 290 | Train step #90720   | Loss_ALL: 7.9688 | Loss Otho 0.0044  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 290 | Train step #90730   | Loss_ALL: 7.9682 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 290 | Train step #90740   | Loss_ALL: 7.9631 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 290 | Train step #90750   | Loss_ALL: 7.9719 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 290 | Eval  step #90757   | Loss: 8.0560  | KWS ACC: 0.6875 | SPEAKER ACC: 0.3125 
+Epoch 290 | Eval  step #90767   | Loss: 8.0019  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 290 | Eval  step #90777   | Loss: 7.9661  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 290 | Eval  step #90787   | Loss: 7.9652  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+===========================================================================
+EPOCH #290     | TRAIN KWS ACC: 95.84% | TRAIN SPEAKER ACC: 30.54% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  91.61% | VAL   SPEAKER ACC: 29.93% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 291 | Train step #90792   | Loss_ALL: 7.9629 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 291 | Train step #90802   | Loss_ALL: 7.9651 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 291 | Train step #90812   | Loss_ALL: 7.9631 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 291 | Train step #90822   | Loss_ALL: 7.9611 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 291 | Train step #90832   | Loss_ALL: 7.9631 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 291 | Train step #90842   | Loss_ALL: 7.9618 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 291 | Train step #90852   | Loss_ALL: 7.9640 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.0625 
+Epoch 291 | Train step #90862   | Loss_ALL: 7.9624 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 291 | Train step #90872   | Loss_ALL: 7.9611 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 291 | Train step #90882   | Loss_ALL: 7.9608 | Loss Otho 0.0006  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 291 | Train step #90892   | Loss_ALL: 7.9619 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 291 | Train step #90902   | Loss_ALL: 7.9683 | Loss Otho 0.0008  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 291 | Train step #90912   | Loss_ALL: 7.9629 | Loss Otho 0.0009  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 291 | Train step #90922   | Loss_ALL: 7.9628 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 291 | Train step #90932   | Loss_ALL: 7.9621 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 291 | Train step #90942   | Loss_ALL: 7.9638 | Loss Otho 0.0008  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 291 | Train step #90952   | Loss_ALL: 7.9660 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1875 
+Epoch 291 | Train step #90962   | Loss_ALL: 7.9643 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 291 | Train step #90972   | Loss_ALL: 7.9616 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 291 | Train step #90982   | Loss_ALL: 7.9600 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 291 | Train step #90992   | Loss_ALL: 7.9682 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 291 | Train step #91002   | Loss_ALL: 7.9626 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 291 | Train step #91012   | Loss_ALL: 7.9645 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 291 | Train step #91022   | Loss_ALL: 7.9639 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 291 | Train step #91032   | Loss_ALL: 7.9608 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 291 | Train step #91042   | Loss_ALL: 7.9616 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 291 | Train step #91052   | Loss_ALL: 7.9638 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 291 | Train step #91062   | Loss_ALL: 7.9633 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.6250 
+Epoch 291 | Eval  step #91069   | Loss: 8.0970  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 291 | Eval  step #91079   | Loss: 7.9982  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 291 | Eval  step #91089   | Loss: 8.0864  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 291 | Eval  step #91099   | Loss: 8.0371  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+===========================================================================
+EPOCH #291     | TRAIN KWS ACC: 96.11% | TRAIN SPEAKER ACC: 32.10% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  92.15% | VAL   SPEAKER ACC: 31.20% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 292 | Train step #91104   | Loss_ALL: 7.9632 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.4375 
+Epoch 292 | Train step #91114   | Loss_ALL: 7.9646 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 292 | Train step #91124   | Loss_ALL: 7.9622 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1875 
+Epoch 292 | Train step #91134   | Loss_ALL: 7.9620 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 292 | Train step #91144   | Loss_ALL: 7.9619 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 292 | Train step #91154   | Loss_ALL: 7.9616 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 292 | Train step #91164   | Loss_ALL: 7.9625 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 292 | Train step #91174   | Loss_ALL: 7.9639 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 292 | Train step #91184   | Loss_ALL: 7.9613 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 292 | Train step #91194   | Loss_ALL: 7.9606 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 292 | Train step #91204   | Loss_ALL: 7.9614 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 292 | Train step #91214   | Loss_ALL: 7.9617 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 292 | Train step #91224   | Loss_ALL: 7.9629 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 292 | Train step #91234   | Loss_ALL: 7.9609 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 292 | Train step #91244   | Loss_ALL: 7.9630 | Loss Otho 0.0001  | KWS ACC: 0.7500 | SPEAKER ACC: 0.2500 
+Epoch 292 | Train step #91254   | Loss_ALL: 7.9643 | Loss Otho 0.0000  | KWS ACC: 0.8125 | SPEAKER ACC: 0.3125 
+Epoch 292 | Train step #91264   | Loss_ALL: 7.9595 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 292 | Train step #91274   | Loss_ALL: 7.9624 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 292 | Train step #91284   | Loss_ALL: 7.9636 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 292 | Train step #91294   | Loss_ALL: 7.9617 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 292 | Train step #91304   | Loss_ALL: 7.9618 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 292 | Train step #91314   | Loss_ALL: 7.9612 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 292 | Train step #91324   | Loss_ALL: 7.9613 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 292 | Train step #91334   | Loss_ALL: 7.9806 | Loss Otho 0.0006  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 292 | Train step #91344   | Loss_ALL: 7.9610 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 292 | Train step #91354   | Loss_ALL: 7.9702 | Loss Otho 0.0002  | KWS ACC: 0.8125 | SPEAKER ACC: 0.3750 
+Epoch 292 | Train step #91364   | Loss_ALL: 7.9637 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 292 | Train step #91374   | Loss_ALL: 7.9639 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 292 | Eval  step #91381   | Loss: 8.0026  | KWS ACC: 0.8125 | SPEAKER ACC: 0.3125 
+Epoch 292 | Eval  step #91391   | Loss: 7.9756  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 292 | Eval  step #91401   | Loss: 7.9720  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 292 | Eval  step #91411   | Loss: 8.0126  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+===========================================================================
+EPOCH #292     | TRAIN KWS ACC: 96.45% | TRAIN SPEAKER ACC: 31.96% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  91.24% | VAL   SPEAKER ACC: 31.57% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 293 | Train step #91416   | Loss_ALL: 7.9620 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 293 | Train step #91426   | Loss_ALL: 7.9605 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 293 | Train step #91436   | Loss_ALL: 7.9613 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 293 | Train step #91446   | Loss_ALL: 7.9606 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 293 | Train step #91456   | Loss_ALL: 7.9615 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 293 | Train step #91466   | Loss_ALL: 7.9624 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 293 | Train step #91476   | Loss_ALL: 7.9609 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 293 | Train step #91486   | Loss_ALL: 7.9615 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 293 | Train step #91496   | Loss_ALL: 7.9608 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 293 | Train step #91506   | Loss_ALL: 7.9635 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 293 | Train step #91516   | Loss_ALL: 7.9609 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 293 | Train step #91526   | Loss_ALL: 7.9620 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 293 | Train step #91536   | Loss_ALL: 7.9618 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 293 | Train step #91546   | Loss_ALL: 7.9617 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 293 | Train step #91556   | Loss_ALL: 7.9621 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 293 | Train step #91566   | Loss_ALL: 7.9638 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 293 | Train step #91576   | Loss_ALL: 7.9634 | Loss Otho 0.0002  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 293 | Train step #91586   | Loss_ALL: 7.9607 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 293 | Train step #91596   | Loss_ALL: 8.0182 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 293 | Train step #91606   | Loss_ALL: 7.9679 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 293 | Train step #91616   | Loss_ALL: 7.9627 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 293 | Train step #91626   | Loss_ALL: 7.9653 | Loss Otho 0.0001  | KWS ACC: 0.8125 | SPEAKER ACC: 0.5625 
+Epoch 293 | Train step #91636   | Loss_ALL: 7.9637 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 293 | Train step #91646   | Loss_ALL: 7.9661 | Loss Otho 0.0004  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 293 | Train step #91656   | Loss_ALL: 7.9685 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 293 | Train step #91666   | Loss_ALL: 7.9641 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 293 | Train step #91676   | Loss_ALL: 7.9671 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 293 | Train step #91686   | Loss_ALL: 7.9602 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 293 | Eval  step #91693   | Loss: 7.9756  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 293 | Eval  step #91703   | Loss: 8.0169  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 293 | Eval  step #91713   | Loss: 7.9652  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 293 | Eval  step #91723   | Loss: 8.1395  | KWS ACC: 0.8125 | SPEAKER ACC: 0.3125 
+===========================================================================
+EPOCH #293     | TRAIN KWS ACC: 96.29% | TRAIN SPEAKER ACC: 32.53% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  92.15% | VAL   SPEAKER ACC: 30.29% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 294 | Train step #91728   | Loss_ALL: 7.9625 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 294 | Train step #91738   | Loss_ALL: 7.9628 | Loss Otho 0.0004  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 294 | Train step #91748   | Loss_ALL: 7.9616 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 294 | Train step #91758   | Loss_ALL: 7.9613 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 294 | Train step #91768   | Loss_ALL: 7.9637 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 294 | Train step #91778   | Loss_ALL: 7.9659 | Loss Otho 0.0012  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 294 | Train step #91788   | Loss_ALL: 7.9672 | Loss Otho 0.0007  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 294 | Train step #91798   | Loss_ALL: 7.9616 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 294 | Train step #91808   | Loss_ALL: 7.9718 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 294 | Train step #91818   | Loss_ALL: 7.9688 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 294 | Train step #91828   | Loss_ALL: 7.9659 | Loss Otho 0.0002  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 294 | Train step #91838   | Loss_ALL: 7.9633 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5625 
+Epoch 294 | Train step #91848   | Loss_ALL: 7.9784 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1875 
+Epoch 294 | Train step #91858   | Loss_ALL: 7.9638 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 294 | Train step #91868   | Loss_ALL: 7.9614 | Loss Otho 0.0004  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 294 | Train step #91878   | Loss_ALL: 7.9622 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 294 | Train step #91888   | Loss_ALL: 7.9629 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 294 | Train step #91898   | Loss_ALL: 7.9628 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 294 | Train step #91908   | Loss_ALL: 7.9641 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 294 | Train step #91918   | Loss_ALL: 7.9622 | Loss Otho 0.0006  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 294 | Train step #91928   | Loss_ALL: 7.9644 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 294 | Train step #91938   | Loss_ALL: 7.9619 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 294 | Train step #91948   | Loss_ALL: 7.9618 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 294 | Train step #91958   | Loss_ALL: 7.9622 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 294 | Train step #91968   | Loss_ALL: 7.9628 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 294 | Train step #91978   | Loss_ALL: 7.9643 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.5000 
+Epoch 294 | Train step #91988   | Loss_ALL: 7.9620 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 294 | Train step #91998   | Loss_ALL: 7.9625 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 294 | Eval  step #92005   | Loss: 7.9970  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 294 | Eval  step #92015   | Loss: 7.9672  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 294 | Eval  step #92025   | Loss: 8.0197  | KWS ACC: 0.8125 | SPEAKER ACC: 0.1875 
+Epoch 294 | Eval  step #92035   | Loss: 7.9792  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+===========================================================================
+EPOCH #294     | TRAIN KWS ACC: 96.29% | TRAIN SPEAKER ACC: 31.42% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  91.97% | VAL   SPEAKER ACC: 33.03% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 295 | Train step #92040   | Loss_ALL: 7.9620 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 295 | Train step #92050   | Loss_ALL: 7.9673 | Loss Otho 0.0045  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 295 | Train step #92060   | Loss_ALL: 7.9682 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 295 | Train step #92070   | Loss_ALL: 7.9756 | Loss Otho 0.0033  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1875 
+Epoch 295 | Train step #92080   | Loss_ALL: 7.9640 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 295 | Train step #92090   | Loss_ALL: 7.9637 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 295 | Train step #92100   | Loss_ALL: 7.9622 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 295 | Train step #92110   | Loss_ALL: 7.9626 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 295 | Train step #92120   | Loss_ALL: 7.9608 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 295 | Train step #92130   | Loss_ALL: 7.9626 | Loss Otho 0.0009  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 295 | Train step #92140   | Loss_ALL: 7.9648 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 295 | Train step #92150   | Loss_ALL: 7.9622 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 295 | Train step #92160   | Loss_ALL: 7.9630 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 295 | Train step #92170   | Loss_ALL: 8.0255 | Loss Otho 0.0094  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 295 | Train step #92180   | Loss_ALL: 7.9620 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 295 | Train step #92190   | Loss_ALL: 7.9642 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 295 | Train step #92200   | Loss_ALL: 7.9644 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 295 | Train step #92210   | Loss_ALL: 7.9678 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 295 | Train step #92220   | Loss_ALL: 7.9620 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 295 | Train step #92230   | Loss_ALL: 7.9632 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5625 
+Epoch 295 | Train step #92240   | Loss_ALL: 7.9869 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 295 | Train step #92250   | Loss_ALL: 7.9752 | Loss Otho 0.0012  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 295 | Train step #92260   | Loss_ALL: 7.9613 | Loss Otho 0.0024  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 295 | Train step #92270   | Loss_ALL: 7.9612 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 295 | Train step #92280   | Loss_ALL: 7.9971 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 295 | Train step #92290   | Loss_ALL: 7.9613 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 295 | Train step #92300   | Loss_ALL: 7.9629 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 295 | Train step #92310   | Loss_ALL: 7.9623 | Loss Otho 0.0014  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 295 | Eval  step #92317   | Loss: 8.1036  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 295 | Eval  step #92327   | Loss: 8.0186  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 295 | Eval  step #92337   | Loss: 8.0627  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 295 | Eval  step #92347   | Loss: 8.0432  | KWS ACC: 0.7500 | SPEAKER ACC: 0.1875 
+===========================================================================
+EPOCH #295     | TRAIN KWS ACC: 96.22% | TRAIN SPEAKER ACC: 31.24% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  91.61% | VAL   SPEAKER ACC: 31.02% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 296 | Train step #92352   | Loss_ALL: 7.9617 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 296 | Train step #92362   | Loss_ALL: 7.9624 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.5000 
+Epoch 296 | Train step #92372   | Loss_ALL: 7.9618 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 296 | Train step #92382   | Loss_ALL: 7.9622 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 296 | Train step #92392   | Loss_ALL: 7.9591 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 296 | Train step #92402   | Loss_ALL: 7.9629 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 296 | Train step #92412   | Loss_ALL: 7.9626 | Loss Otho 0.0002  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3750 
+Epoch 296 | Train step #92422   | Loss_ALL: 7.9674 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 296 | Train step #92432   | Loss_ALL: 7.9632 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 296 | Train step #92442   | Loss_ALL: 7.9627 | Loss Otho 0.0011  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 296 | Train step #92452   | Loss_ALL: 7.9692 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 296 | Train step #92462   | Loss_ALL: 7.9653 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 296 | Train step #92472   | Loss_ALL: 7.9618 | Loss Otho 0.0003  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 296 | Train step #92482   | Loss_ALL: 7.9610 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 296 | Train step #92492   | Loss_ALL: 7.9632 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 296 | Train step #92502   | Loss_ALL: 7.9623 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 296 | Train step #92512   | Loss_ALL: 7.9614 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 296 | Train step #92522   | Loss_ALL: 7.9612 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 296 | Train step #92532   | Loss_ALL: 7.9618 | Loss Otho 0.0010  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 296 | Train step #92542   | Loss_ALL: 7.9631 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 296 | Train step #92552   | Loss_ALL: 7.9633 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 
+Epoch 296 | Train step #92562   | Loss_ALL: 7.9711 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 296 | Train step #92572   | Loss_ALL: 7.9630 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 296 | Train step #92582   | Loss_ALL: 7.9659 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 296 | Train step #92592   | Loss_ALL: 7.9611 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 296 | Train step #92602   | Loss_ALL: 7.9613 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 296 | Train step #92612   | Loss_ALL: 7.9618 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 296 | Train step #92622   | Loss_ALL: 7.9618 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 296 | Eval  step #92629   | Loss: 8.0292  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 296 | Eval  step #92639   | Loss: 8.0021  | KWS ACC: 0.8125 | SPEAKER ACC: 0.1875 
+Epoch 296 | Eval  step #92649   | Loss: 8.0617  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 296 | Eval  step #92659   | Loss: 8.0911  | KWS ACC: 0.9375 | SPEAKER ACC: 0.0625 
+===========================================================================
+EPOCH #296     | TRAIN KWS ACC: 96.27% | TRAIN SPEAKER ACC: 32.19% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  92.15% | VAL   SPEAKER ACC: 31.02% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 297 | Train step #92664   | Loss_ALL: 7.9633 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 297 | Train step #92674   | Loss_ALL: 7.9609 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 297 | Train step #92684   | Loss_ALL: 7.9607 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 297 | Train step #92694   | Loss_ALL: 7.9622 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 297 | Train step #92704   | Loss_ALL: 7.9600 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 297 | Train step #92714   | Loss_ALL: 7.9629 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 297 | Train step #92724   | Loss_ALL: 7.9638 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 297 | Train step #92734   | Loss_ALL: 7.9603 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 297 | Train step #92744   | Loss_ALL: 7.9617 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 297 | Train step #92754   | Loss_ALL: 7.9631 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3750 
+Epoch 297 | Train step #92764   | Loss_ALL: 7.9622 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.0625 
+Epoch 297 | Train step #92774   | Loss_ALL: 7.9610 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.4375 
+Epoch 297 | Train step #92784   | Loss_ALL: 7.9603 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 297 | Train step #92794   | Loss_ALL: 7.9626 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5000 
+Epoch 297 | Train step #92804   | Loss_ALL: 7.9611 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 297 | Train step #92814   | Loss_ALL: 7.9622 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 297 | Train step #92824   | Loss_ALL: 7.9613 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 297 | Train step #92834   | Loss_ALL: 7.9610 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 297 | Train step #92844   | Loss_ALL: 7.9622 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 297 | Train step #92854   | Loss_ALL: 7.9695 | Loss Otho 0.0010  | KWS ACC: 0.8750 | SPEAKER ACC: 0.1250 
+Epoch 297 | Train step #92864   | Loss_ALL: 7.9625 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 297 | Train step #92874   | Loss_ALL: 7.9639 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 297 | Train step #92884   | Loss_ALL: 7.9612 | Loss Otho 0.0002  | KWS ACC: 0.9375 | SPEAKER ACC: 0.5625 
+Epoch 297 | Train step #92894   | Loss_ALL: 7.9637 | Loss Otho 0.0002  | KWS ACC: 0.8125 | SPEAKER ACC: 0.3750 
+Epoch 297 | Train step #92904   | Loss_ALL: 7.9616 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 297 | Train step #92914   | Loss_ALL: 7.9631 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 297 | Train step #92924   | Loss_ALL: 7.9650 | Loss Otho 0.0007  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1250 
+Epoch 297 | Train step #92934   | Loss_ALL: 7.9612 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 297 | Eval  step #92941   | Loss: 7.9797  | KWS ACC: 0.8125 | SPEAKER ACC: 0.2500 
+Epoch 297 | Eval  step #92951   | Loss: 7.9868  | KWS ACC: 0.8125 | SPEAKER ACC: 0.1250 
+Epoch 297 | Eval  step #92961   | Loss: 8.0649  | KWS ACC: 0.8750 | SPEAKER ACC: 0.0625 
+Epoch 297 | Eval  step #92971   | Loss: 7.9628  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+===========================================================================
+EPOCH #297     | TRAIN KWS ACC: 96.43% | TRAIN SPEAKER ACC: 32.71% | TRAIN LOSS : 8.96
+             | VAL KWS ACC :  91.24% | VAL   SPEAKER ACC: 28.47% | VAL LOSS   : 0.00
+===========================================================================
+Epoch 298 | Train step #92976   | Loss_ALL: 7.9618 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3125 
+Epoch 298 | Train step #92986   | Loss_ALL: 7.9736 | Loss Otho 0.0001  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 298 | Train step #92996   | Loss_ALL: 7.9682 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 298 | Train step #93006   | Loss_ALL: 7.9619 | Loss Otho 0.0003  | KWS ACC: 0.9375 | SPEAKER ACC: 0.2500 
+Epoch 298 | Train step #93016   | Loss_ALL: 8.0162 | Loss Otho 0.0022  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5625 
+Epoch 298 | Train step #93026   | Loss_ALL: 7.9632 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 298 | Train step #93036   | Loss_ALL: 7.9651 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.1875 
+Epoch 298 | Train step #93046   | Loss_ALL: 7.9862 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.0000 
+Epoch 298 | Train step #93056   | Loss_ALL: 7.9638 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1250 
+Epoch 298 | Train step #93066   | Loss_ALL: 7.9603 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 298 | Train step #93076   | Loss_ALL: 7.9601 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.3750 
+Epoch 298 | Train step #93086   | Loss_ALL: 7.9626 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.5000 
+Epoch 298 | Train step #93096   | Loss_ALL: 7.9621 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 298 | Train step #93106   | Loss_ALL: 7.9647 | Loss Otho 0.0002  | KWS ACC: 0.8750 | SPEAKER ACC: 0.2500 
+Epoch 298 | Train step #93116   | Loss_ALL: 7.9636 | Loss Otho 0.0000  | KWS ACC: 0.8750 | SPEAKER ACC: 0.4375 
+Epoch 298 | Train step #93126   | Loss_ALL: 7.9604 | Loss Otho 0.0004  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 298 | Train step #93136   | Loss_ALL: 7.9664 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.4375 
+Epoch 298 | Train step #93146   | Loss_ALL: 7.9641 | Loss Otho 0.0000  | KWS ACC: 0.9375 | SPEAKER ACC: 0.3125 
+Epoch 298 | Train step #93156   | Loss_ALL: 7.9606 | Loss Otho 0.0000  | KWS ACC: 1.0000 | SPEAKER ACC: 0.1875 
+Epoch 298 | Train step #93166   | Loss_ALL: 7.9623 | Loss Otho 0.0002  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 298 | Train step #93176   | Loss_ALL: 7.9883 | Loss Otho 0.0001  | KWS ACC: 1.0000 | SPEAKER ACC: 0.2500 
+Epoch 298 | Train step #93186   | Loss_ALL: 7.9736 | Loss Otho 0.0001  | KWS ACC: 0.8750 | SPEAKER ACC: 0.3125 

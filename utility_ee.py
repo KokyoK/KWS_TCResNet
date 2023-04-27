@@ -75,8 +75,8 @@ class OrgLoss(nn.Module):
 
 
     def forward(self, map_k, map_s):
-
-        o_loss = torch.norm(torch.matmul(map_k.squeeze(), map_s.squeeze().permute(0,2,1)), p='fro')
+        mul = torch.matmul(map_k.squeeze(dim=2), map_s.squeeze(dim=2).permute(0,2,1))
+        o_loss = torch.norm(mul, p='fro') ** 2 / (48*48)
         return o_loss
 
 def train(model, root_dir, word_list, speaker_list,num_epoch):
@@ -90,7 +90,7 @@ def train(model, root_dir, word_list, speaker_list,num_epoch):
     
     # Loading dataset
     ap = sd.AudioPreprocessor() # Computes Log-Mel spectrogram
-    train_files, dev_files, test_files = sd.split_dataset(root_dir, word_list, )
+    train_files, dev_files, test_files = sd.split_dataset(root_dir, word_list,speaker_list )
 
     train_data = sd.SpeechDataset(train_files, "train", ap, word_list,speaker_list)
     dev_data = sd.SpeechDataset(dev_files, "dev", ap, word_list,speaker_list)
@@ -141,8 +141,8 @@ def train(model, root_dir, word_list, speaker_list,num_epoch):
 
 
             with torch.autograd.set_detect_anomaly(True):
-                loss_full.backward(retain_graph=True)
-                # loss_kw.backward(retain_graph=True)
+                # loss_full.backward(retain_graph=True)
+                loss_kw.backward(retain_graph=True)
                 # loss_id.backward(retain_graph=True)
                 # loss_o.backward(retain_graph=True)
             loss = loss_full

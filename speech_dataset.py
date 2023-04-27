@@ -59,7 +59,7 @@ def get_all_data_length(root_dir):          # for debug
 
 
 
-def split_dataset(root_dir, word_list, speaker_list, split_pct=[0.9, 0.1, 0]):
+def split_dataset(root_dir, word_list, speaker_list, split_pct=[0.8, 0.2, 0]):
     """ Generates a list of paths for each sample and splits them into training, validation and test sets.
 
         Input(s):
@@ -184,7 +184,7 @@ class SpeechDataset(data.Dataset):
         """ Loads audio, shifts data and adds noise. """
         # print(data_element)
         wav_data = torchaudio.load(data_element[0])[0]
-        wav_data = F_audio.resample(wav_data, 48000, 8000)  # @NOTE: 下采样到8000，部署的时候改原采样率
+        wav_data = F_audio.resample(wav_data, 16000, 8000)  # @NOTE: 下采样到8000，部署的时候改原采样率
 
         # Background noise used for silence needs to be shortened to 1 second.
         if (data_element[1] == "silence"):
