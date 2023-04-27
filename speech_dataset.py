@@ -10,7 +10,7 @@ import torch.nn as nn
 import numpy as np
 import torchaudio
 import random
-
+random.seed(42)
 import torch
 torch.manual_seed(42)
 import math
@@ -92,26 +92,23 @@ def split_dataset(root_dir, word_list, speaker_list, split_pct=[0.8, 0.2, 0]):
     available_words = os.listdir(root_dir)      # 列出原数据集的words
     for i, word in enumerate(available_words):
         if (word in word_list):
-            for speaker in speaker_list:
-                temp_set = []
-                for wav_file in os.listdir(root_dir + word):
-                    if wav_file.endswith(".wav"):
-                        id = wav_file.split("_",1)[0]
-                        if (id == speaker):
-                            temp_set.append((root_dir + word + "/" + wav_file, word,id))
+            temp_set = []
+            for wav_file in os.listdir(root_dir + word):
+                if wav_file.endswith(".wav"):
+                        temp_set.append((root_dir + word + "/" + wav_file, word,id))
 
-                n_samples = len(temp_set)
-                n_train = int(n_samples * split_pct[0])
-                n_dev = int(n_samples * split_pct[1])
-            # If word samples are insufficient, re-use same data multiple times.
-            # This isn't ideal since validation/test sets might contain data from the training set.
-            # if (len(temp_set) < n_samples):
-            #     temp_set *= math.ceil(n_samples / len(temp_set))
-                temp_set = temp_set[:n_samples]
-                random.shuffle(temp_set)
-                train_set += temp_set[:n_train]
-                dev_set += temp_set[n_train:n_train + n_dev]
-                test_set += temp_set[n_train + n_dev:]
+            n_samples = len(temp_set)
+            n_train = int(n_samples * split_pct[0])
+            n_dev = int(n_samples * split_pct[1])
+        # If word samples are insufficient, re-use same data multiple times.
+        # This isn't ideal since validation/test sets might contain data from the training set.
+        # if (len(temp_set) < n_samples):
+        #     temp_set *= math.ceil(n_samples / len(temp_set))
+            temp_set = temp_set[:n_samples]
+            random.shuffle(temp_set)
+            train_set += temp_set[:n_train]
+            dev_set += temp_set[n_train:n_train + n_dev]
+            test_set += temp_set[n_train + n_dev:]
 
         elif ((word != "_background_noise_") and ("unknown" in word_list)):  # Adding unknown words
             if os.path.isdir(root_dir + word):  # 排除缓存文件e.g. .DS_Store
@@ -196,7 +193,7 @@ class SpeechDataset(data.Dataset):
         # print(out_data.shape)
         
        
-        data_len = 24000
+        data_len = 16000
         # Pad smaller audio files with zeros to reach 1 second (16_000 samples)
         if (out_data.shape[1] < data_len):
             out_data = F.pad(out_data, pad=(0, (data_len - out_data.shape[1])), mode='constant', value=0)
@@ -215,7 +212,7 @@ class SpeechDataset(data.Dataset):
         if self.is_noisy:
             out_data += 0.01 * torch.randn(out_data.shape)
         
-        return (out_data, data_element[1],data_element[2])
+        return (out_data, data_element[1])
 
 
 
@@ -226,7 +223,7 @@ class SpeechDataset(data.Dataset):
     def __getitem__(self, idx):
         # print(self.data_list[idx])
         cur_element = self.load_data(self.data_list[idx])
-        cur_element = (cur_element[0], self.word_list.index(cur_element[1]), self.speaker_list.index(cur_element[2]))
+        cur_element = (cur_element[0], self.word_list.index(cur_element[1]))
         return self.transforms(cur_element)
 
 
@@ -249,7 +246,7 @@ class AudioPreprocessor():
 
         self.mfcc = nn.Sequential(
             torchaudio.transforms.MFCC(
-                sample_rate=24000,
+                sample_rate=16000,
                 n_mfcc=40,
                 dct_type=2,
                 norm='ortho',
@@ -273,7 +270,7 @@ class AudioPreprocessor():
         # Set Filters as channels
         o_data = o_data.view(o_data.shape[1], o_data.shape[0], o_data.shape[2])
         # print(o_data.shape,data[1])
-        return o_data, data[1],data[2]
+        return o_data, data[1]
 
 
 if __name__ == "__main__":

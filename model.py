@@ -84,36 +84,60 @@ class TCResNet8(nn.Module):
         self.avg_pool = nn.AvgPool2d(kernel_size=(1, 13), stride=1)
         self.fc = nn.Conv2d(in_channels=int(48 * k), out_channels=10, kernel_size=1, padding=0,
                             bias=False)
-        self.fc_s = nn.Conv2d(in_channels=int(48 * k), out_channels=1481, kernel_size=1, padding=0,
+        # self.fc_s = nn.Conv2d(in_channels=int(48 * k), out_channels=1481, kernel_size=1, padding=0,
+        #                     bias=False)
+        self.early_fc_0 = nn.Conv2d(in_channels=int(24 * k), out_channels=10, kernel_size=1, padding=0,
+                            bias=False)
+        self.early_fc_1 = nn.Conv2d(in_channels=int(32 * k), out_channels=10, kernel_size=1, padding=0,
                             bias=False)
 
-    def forward(self, x):
-        # print("nn input shape: ",x.shape)
-        
 
+    def forward(self,x):
+        out0 = self.forward_0(x)
+        out1 = self.forward_1(x)
+        out2 = self.forward_full(x)
+        return [out0,out1, out2]
 
+    def forward_0(self, x):
         out = self.conv_block(x)
-        out_inter = self.s2_block0(out)
-        #### keyword recog    
-        out = self.s2_block1(out_inter)
-        k_map = self.s2_block2(out)
-        out = self.avg_pool(k_map)
+        out = self.s2_block0(out)
+        out = F.avg_pool2d(out, kernel_size = (1,51))
+        out = self.early_fc_0(out)
+        out = F.softmax(out, dim=1)
+        out = out.view(out.shape[0], -1)
+        return out
+
+    def forward_1(self, x):
+        with torch.no_grad():
+            out = self.conv_block(x)
+            out = self.s2_block0(out)
+        out = self.s2_block1(out)
+        out = F.avg_pool2d(out, kernel_size=(1, 26))
+        out = self.early_fc_1(out)
+        out = F.softmax(out, dim=1)
+        out = out.view(out.shape[0], -1)
+        return out
+
+    def forward_full(self, x):
+        # print("nn input shape: ",x.shape)
+        with torch.no_grad():
+            out = self.conv_block(x)
+            out = self.s2_block0(out)
+            out = self.s2_block1(out)
+        out = self.s2_block2(out)
+        out = F.avg_pool2d(out, kernel_size=(1, 13))
         out = self.fc(out)
         out = F.softmax(out, dim=1)
-        out_k = out.view(out.shape[0], -1)
+        out = out.view(out.shape[0], -1)
+        return out
 
-        #### speaker recog
-        with torch.no_grad():
-            out_i = self.conv_block(x)
-            out_i = self.s2_block0(out_i)
-            out_s = self.s2_block1(out_i)
-            s_map = self.s2_block2(out_s)
-            out_s = self.avg_pool(s_map)
-        out_s = self.fc_s(out_s)
-        out_s = F.softmax(out_s, dim=1)
-        out_s = out_s.view(out_s.shape[0], -1)
 
-        return out_k,out_s ,k_map,s_map
+
+
+
+
+
+
 
 
     def save(self, is_onnx=0, name="TCResNet8"):
