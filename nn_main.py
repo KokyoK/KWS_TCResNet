@@ -10,10 +10,10 @@ import os
 
 
 TRAIN = True
-ROOT_DIR = "dataset/google_origin/"
-WORD_LIST = ["yes", "no", "up", "down", "left", "right", "on", "off", "stop", "go"]
-# ROOT_DIR = "dataset/huawei_modify/WAV_new/"
-# WORD_LIST = ['hey_celia', '支付宝扫一扫', '停止播放', '下一首', '播放音乐', '微信支付', '关闭降噪', '小艺小艺', '调小音量', '开启透传']
+# ROOT_DIR = "dataset/google_origin/"
+# WORD_LIST = ["yes", "no", "up", "down", "left", "right", "on", "off", "stop", "go"]
+ROOT_DIR = "dataset/huawei_modify/WAV_new/"
+WORD_LIST = ['hey_celia', '支付宝扫一扫', '停止播放', '下一首', '播放音乐', '微信支付', '关闭降噪', '小艺小艺', '调小音量', '开启透传']
 SPEAKER_LIST = sd.fetch_speaker_list(ROOT_DIR, WORD_LIST)
 # SPEAKER_LIST = [speaker for speaker in os.listdir("dataset/huawei_modify/WAV/") if speaker.startswith("A")]
 # ROOT_DIR = "dataset/lege/"

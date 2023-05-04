@@ -74,9 +74,11 @@ class OrgLoss(nn.Module):
         super().__init__()
 
 
-    def forward(self, map_k, map_s):
-        mul = torch.matmul(map_k.squeeze(dim=2), map_s.squeeze(dim=2).permute(0,2,1))
-        o_loss = torch.norm(mul, p='fro') ** 2 / (48*48)
+    def forward(self, map_k, map_s,Share, Kws,Speaker):
+        # mul = torch.matmul(map_k.squeeze(dim=2), map_s.squeeze(dim=2).permute(0,2,1))
+        # o_loss = torch.norm(mul, p='fro') ** 2 / (48*48)
+        o_loss = ((torch.norm(Share @ Kws.T, p='fro') + torch.norm(Share @ Speaker.T, p='fro')) ** 2) / (
+                Share.data.shape[0] * Kws.data.shape[1])
         return o_loss
 
 def train(model, root_dir, word_list, speaker_list,num_epoch):
@@ -136,13 +138,13 @@ def train(model, root_dir, word_list, speaker_list,num_epoch):
 
             loss_kw = criterion(out_kw, label_kw)
             loss_id = criterion(out_id, label_id)
-            loss_o = OLoss(map_kw,map_s)
-            loss_full = loss_id + loss_kw 
+            loss_o = OLoss(map_kw,map_s,model.share_para, model.kws_para, model.speaker_para)
+            loss_full = loss_id + loss_kw + loss_o
 
 
             with torch.autograd.set_detect_anomaly(True):
-                # loss_full.backward(retain_graph=True)
-                loss_kw.backward(retain_graph=True)
+                loss_full.backward(retain_graph=True)
+                # loss_kw.backward(retain_graph=True)
                 # loss_id.backward(retain_graph=True)
                 # loss_o.backward(retain_graph=True)
             loss = loss_full
@@ -179,8 +181,8 @@ def train(model, root_dir, word_list, speaker_list,num_epoch):
             # cal_loss
             loss_kw = criterion(out_kw, label_kw)
             loss_id = criterion(out_id, label_id)
-            loss_o = OLoss(map_kw, map_s)
-            loss_full = loss_id + loss_kw + 0.5*loss_o
+            loss_o = OLoss(map_kw,map_s,model.share_para, model.kws_para, model.speaker_para)
+            loss_full = loss_id + loss_kw + loss_o
 
             loss = loss_full
 

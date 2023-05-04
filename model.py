@@ -87,6 +87,13 @@ class TCResNet8(nn.Module):
         self.fc_s = nn.Conv2d(in_channels=int(48 * k), out_channels=1481, kernel_size=1, padding=0,
                             bias=False)
 
+        self.d = 19
+        self.share_para = nn.Parameter(torch.randn(
+            self.d, self.d), requires_grad=True)
+        self.kws_para = nn.Parameter(torch.randn(
+            self.d, self.d), requires_grad=True)
+        self.speaker_para = nn.Parameter(torch.randn(
+            self.d, self.d), requires_grad=True)
     def forward(self, x):
         # print("nn input shape: ",x.shape)
         
@@ -97,7 +104,9 @@ class TCResNet8(nn.Module):
         #### keyword recog    
         out = self.s2_block1(out_inter)
         k_map = self.s2_block2(out)
-        out = self.avg_pool(k_map)
+        k_map_unique = F.linear(k_map, self.kws_para)
+        # k_map_share = F.linear(k_map, self.share_para)
+        out = self.avg_pool(k_map_unique)
         out = self.fc(out)
         out = F.softmax(out, dim=1)
         out_k = out.view(out.shape[0], -1)
@@ -107,11 +116,16 @@ class TCResNet8(nn.Module):
             out_i = self.conv_block(x)
             out_i = self.s2_block0(out_i)
             out_s = self.s2_block1(out_i)
-            s_map = self.s2_block2(out_s)
-            out_s = self.avg_pool(s_map)
+
+        s_map = self.s2_block2(out_s)
+        s_map_unique = F.linear(s_map, self.speaker_para)
+        # s_map_share = F.linear(s_map, self.share_para)
+        out_s = self.avg_pool(s_map_unique)
         out_s = self.fc_s(out_s)
         out_s = F.softmax(out_s, dim=1)
         out_s = out_s.view(out_s.shape[0], -1)
+
+
 
         return out_k,out_s ,k_map,s_map
 
