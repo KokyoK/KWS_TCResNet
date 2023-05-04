@@ -30,45 +30,67 @@ else:
 def evaluate_testset(model, test_dataloader):
     # Final test
     test_loss = 0.0
-    test_correct = 0.0
-    model.load()
+    test_correct = [0,0,0]
+    model.load("e_61_valacc_91.084_92.690_92.478.pt")
     model.eval()
-    total_infer_time = 0
-    path_count = [0,0,0]
-    total_flops = 0
 
+    valid_loss = 0
     criterion = nn.CrossEntropyLoss()
-     
-    for batch_idx, (audio_data, labels) in enumerate(test_dataloader):
-
+    step_idx = 0
+    for batch_idx, (audio_data, label_kw) in enumerate(test_dataloader):
         if train_on_gpu:
-            model.cuda()
             audio_data = audio_data.cuda()
-            labels = labels.cuda()
+            label_kw = label_kw.cuda()
 
-        output = model(audio_data)
-        
-        loss = criterion(output, labels)
-        test_loss += loss.item()*audio_data.size(0)
-        test_correct += (torch.sum(torch.argmax(output, 1) == labels).item())
+        outs = model(x=audio_data)
+        [out0, out1, out2] = outs
+        # cal_loss
+
+        loss_0 = criterion(out0, label_kw)
+        loss_1 = criterion(out1, label_kw)
+        loss_2 = criterion(out2, label_kw)
+
+        loss_full = loss_0 + loss_1 + loss_2
+        loss = loss_full
+
+        valid_loss += loss.item() * audio_data.size(0)
+        ba = torch.zeros([e_count])
+        b_hit = torch.zeros([e_count])
+        for i in range(e_count):
+            b_hit[i] = float(torch.sum(torch.argmax(outs[i], 1) == label_kw).item())
+            ba[i] = b_hit[i] / float(audio_data.shape[0])
+            test_correct[i] += b_hit[i]
+
+        # if (batch_idx % 100 == 0):
+        #     print("Loss_ALL: {:.4f}  | KWS ACC: {:.4f} \t| {:.4f}\t| {:.4f}\t|  ".format(
+        #         epoch, step_idx, loss, ba[0], ba[1], ba[2]))
+
+        # valid_kw_correct += b_hit
+        step_idx += 1
 
 
+    valid_loss = valid_loss / len(test_dataloader.dataset)
+    valid_kw_accuracy = torch.zeros([e_count])
+    for i in range(e_count):
+        valid_kw_accuracy[i] = 100.0 * (test_correct[i] / len(test_dataloader.dataset))
+    # print(output.shape)
+    # f1_scores = f1_score(labels, torch.max(output.detach(), 1)[0], average=None, )
+    # print(f1_scores)
+    print("===========================================================================")
 
-        if(time_check):
-            torch.cuda.synchronize()
-            elapsed_time = start.elapsed_time(end)
-            total_infer_time += elapsed_time
-
-    test_loss = test_loss/len(test_dataloader.dataset)
-    test_accuracy = 100.0*(test_correct/len(test_dataloader.dataset))
+    print("             | VAL KWS ACC :  {:.2f}%\t| {:.2f}%\t |{:.2f}% |  VAL LOSS   : {:.2f}".format(
+        valid_kw_accuracy[0], valid_kw_accuracy[1], valid_kw_accuracy[2], valid_loss))
+    # print("Validation path count:   ", path_count)
+    # print("Validation set inference time:    ",total_infer_time/len(dev_dataloader.dataset))
+    print("===========================================================================")
 
     
-    print("================================================")
-    print(" FINAL ACCURACY : {:.4f}% - TEST LOSS : {:.4f}".format(test_accuracy, test_loss))
-    print(" Time for avg test set inference:    ",total_infer_time/len(test_dataloader.dataset))
-    print(" Flops for avg test set inference:    ",total_flops / len(test_dataloader.dataset))
-    # print(" Test Set path count:   ", path_count)
-    print("================================================")
+    # print("================================================")
+    # print(" FINAL ACCURACY : {:.4f}% - TEST LOSS : {:.4f}".format(test_accuracy, test_loss))
+    # print(" Time for avg test set inference:    ",total_infer_time/len(test_dataloader.dataset))
+    # print(" Flops for avg test set inference:    ",total_flops / len(test_dataloader.dataset))
+    # # print(" Test Set path count:   ", path_count)
+    # print("================================================")
 
 class OrgLoss(nn.Module):
     def __init__(self):

@@ -9,7 +9,7 @@ import model as md
 import os
 
 
-TRAIN = True
+TRAIN = False
 ROOT_DIR = "dataset/google_origin/"
 WORD_LIST = ["yes", "no", "up", "down", "left", "right", "on", "off", "stop", "go"]
 # ROOT_DIR = "dataset/huawei_modify/WAV_new/"
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     else:
         train, dev, test = sd.split_dataset(ROOT_DIR, WORD_LIST, SPEAKER_LIST)
         ap = sd.AudioPreprocessor()
-        test_data = sd.SpeechDataset(test, "eval", ap, WORD_LIST)
+        test_data = sd.SpeechDataset(test, "eval", ap, WORD_LIST,SPEAKER_LIST)
         test_dataloader = data.DataLoader(test_data, batch_size=1, shuffle=True)
         util.evaluate_testset(model_fp32, test_dataloader)
         
