@@ -19,7 +19,7 @@ SPEAKER_LIST = sd.fetch_speaker_list(ROOT_DIR, WORD_LIST)
 # ROOT_DIR = "dataset/lege/"
 # WORD_LIST = ['上升', '下降', '乐歌', '停止', '升高', '坐', '复位', '小乐', '站', '降低']
 
-NUM_EPOCH = 2000
+NUM_EPOCH = 5000
 
 
 if __name__ == "__main__":

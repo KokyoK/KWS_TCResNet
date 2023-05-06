@@ -84,7 +84,7 @@ class TCResNet8(nn.Module):
         self.avg_pool = nn.AvgPool2d(kernel_size=(1, 13), stride=1)
         self.fc = nn.Conv2d(in_channels=int(48 * k), out_channels=10, kernel_size=1, padding=0,
                             bias=False)
-        self.fc_s = nn.Conv2d(in_channels=int(48 * k), out_channels=1481, kernel_size=1, padding=0,
+        self.fc_s = nn.Conv2d(in_channels=int(48 * k), out_channels=37, kernel_size=1, padding=0,
                             bias=False)
 
         self.d = 19
@@ -100,10 +100,10 @@ class TCResNet8(nn.Module):
 
 
         out = self.conv_block(x)
-        out_inter = self.s2_block0(out)
+        share_map = self.s2_block0(out)
         #### keyword recog    
-        out = self.s2_block1(out_inter)
-        k_map = self.s2_block2(out)
+        share_map_1 = self.s2_block1(share_map)
+        k_map = self.s2_block2(share_map_1)
         k_map_unique = F.linear(k_map, self.kws_para)
         # k_map_share = F.linear(k_map, self.share_para)
         out = self.avg_pool(k_map_unique)
@@ -112,12 +112,12 @@ class TCResNet8(nn.Module):
         out_k = out.view(out.shape[0], -1)
 
         #### speaker recog
-        with torch.no_grad():
-            out_i = self.conv_block(x)
-            out_i = self.s2_block0(out_i)
-            out_s = self.s2_block1(out_i)
-
-        s_map = self.s2_block2(out_s)
+        # with torch.no_grad():
+        
+        # out_i = self.conv_block(x)
+        # out_i = self.s2_block0(out_i)
+        out_s = self.s2_block1_speaker(share_map)
+        s_map = self.s2_block2_speaker(out_s)
         s_map_unique = F.linear(s_map, self.speaker_para)
         # s_map_share = F.linear(s_map, self.share_para)
         out_s = self.avg_pool(s_map_unique)

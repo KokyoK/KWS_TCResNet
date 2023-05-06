@@ -184,7 +184,7 @@ class SpeechDataset(data.Dataset):
         """ Loads audio, shifts data and adds noise. """
         # print(data_element)
         wav_data = torchaudio.load(data_element[0])[0]
-        wav_data = F_audio.resample(wav_data, 16000, 8000)  # @NOTE: 下采样到8000，部署的时候改原采样率
+        wav_data = F_audio.resample(wav_data, 48000, 8000)  # @NOTE: 下采样到8000，部署的时候改原采样率
 
         # Background noise used for silence needs to be shortened to 1 second.
         if (data_element[1] == "silence"):
@@ -236,7 +236,7 @@ class AudioPreprocessor():
         self.spectrogram = nn.Sequential(
             # torchaudio.transforms.Resample(48000, 16000),
             torchaudio.transforms.MelSpectrogram(
-                sample_rate=16000,
+                sample_rate=24000,
                 n_fft=480,          # window length = 30,
                 hop_length=160,     # stride = 10
                 f_min=0,
