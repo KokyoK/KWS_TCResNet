@@ -134,12 +134,6 @@ class TCResNet8(nn.Module):
 
 
 
-
-
-
-
-
-
     def save(self, is_onnx=0, name="TCResNet8"):
         if (is_onnx):
             dummy_input = torch.randn(16, 40, 1, 101)
