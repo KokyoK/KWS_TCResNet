@@ -214,8 +214,8 @@ def train(model,loaders,num_epoch):
                 ba[i] = b_hit[i]/float(audio_data.shape[0])
                 valid_kw_correct[i]+= b_hit[i]
 
-            if (batch_idx % 100 == 0):
-                print("Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | ACC: {:.4f} \t| {:.4f}\t| {:.4f}\t|  ".format(epoch, step_idx, loss, ba[0],ba[1],ba[2]))
+            if (batch_idx % 1000 == 0):
+                print("Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | ACC: {:.4f} \t| {:.4f}\t| {:.4f}\t|  ".format(epoch, batch_idx, loss, ba[0],ba[1],ba[2]))
 
             # valid_kw_correct += b_hit
             step_idx += 1
