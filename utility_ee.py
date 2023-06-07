@@ -175,7 +175,7 @@ def train(model,loaders,num_epoch):
 
             
             if (batch_idx%100 == 0):
-                print("Epoch {} | Train step #{}   | Loss_ALL: {:.4f} | KWS ACC: {:.4f} \t| {:.4f}\t| {:.4f}|  ".format(epoch, step_idx, loss, ba[0],ba[1],ba[2]))
+                print("Epoch {} | Train step #{}   | Loss_ALL: {:.4f} | ACC: {:.4f} \t| {:.4f}\t| {:.4f}|  ".format(epoch, step_idx, loss, ba[0],ba[1],ba[2]))
 
             # train_kw_correct += b_hit
             step_idx += 1
@@ -215,7 +215,7 @@ def train(model,loaders,num_epoch):
                 valid_kw_correct[i]+= b_hit[i]
 
             if (batch_idx % 100 == 0):
-                print("Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | KWS ACC: {:.4f} \t| {:.4f}\t| {:.4f}\t|  ".format(epoch, step_idx, loss, ba[0],ba[1],ba[2]))
+                print("Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | ACC: {:.4f} \t| {:.4f}\t| {:.4f}\t|  ".format(epoch, step_idx, loss, ba[0],ba[1],ba[2]))
 
             # valid_kw_correct += b_hit
             step_idx += 1
