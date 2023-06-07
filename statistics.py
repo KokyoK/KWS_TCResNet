@@ -6,11 +6,12 @@ import torch.utils.data as data
 from matplotlib import pyplot as plt
 # from sklearn.metrics import f1_score
 from torch.utils.data import random_split, DataLoader, ConcatDataset
-from model import TCResNet8
+from models.model import TCResNet8
 torch.manual_seed(42)
 import numpy as np
 import sys
-import speech_dataset as sd
+from dataset_initializers import speech_dataset as sd
+
 # from torch_cluster import knn_graph, graclus_cluster
 
 # sys.stdout = print_log
@@ -41,23 +42,23 @@ def run_statistic(model, loaders):
         # optimizer.zero_grad()
         losses = [0, 0, 0]
         for layer in range(3):
-            # outs[layer].retain_grad()
+            outs[layer].retain_grad()
             losses[layer] = lossfunc(outs[layer], label)
             acc_layer = torch.argmax(outs[layer],dim=1)
             if (acc_layer == label):
                 accs[i,layer] = 1
             else:
                 err_label[layer,label] += 1
-            # losses[layer].backward()
-            # grads[i,layer] = torch.norm(outs[layer].grad)
+            losses[layer].backward()
+            grads[i,layer] = torch.norm(outs[layer].grad)
             losses[layer] = losses[layer].detach()
-            grads[i, layer] = losses[layer]
+            # grads[i, layer] = losses[layer]
         # optimizer.step()
         # print(i," / ", len(loader))
         if(i % 500 == 0):
             print(i, " / ", len(loader))
     grads = grads.numpy()
-    np.save("ce_test.npy", grads)
+    np.save("grad_test.npy", grads)
     np.save("acc_test.npy", accs)
     print("")
 
@@ -89,7 +90,7 @@ def prepare_run():
 
 
 def display():
-    ces = np.load("ce_test.npy")[:,:3]
+    ces = np.load("grad_test.npy")[:,:3]
     acs = np.load("acc_test.npy")[:,:3]
     errs = np.load("err.npy")
     # '''
@@ -110,20 +111,25 @@ def display():
             for i in range(d):
                 if (ce[k] > gmin + interval * i and ce[k] <= gmin + (i + 1) * interval):
                     count[i] += 1
+        ####counts 2 log ratio ###
+        count =np.log( count / ces.shape[0])
+        # count[count == -np.inf] = 9999
+        # count[count == 9999] = np.min(count)
         counts.append(count)
-        # 绘制柱状图
-
+    plt.figure(figsize=(8, 6))
     plt.plot(x, counts[0], color='#FF0000', label='exit0', linewidth=1.0)
     plt.plot(x, counts[1], color='#00FF00', label='exit1', linewidth=1.0)
     plt.plot(x, counts[2], color='#0000FF', label='exit2', linewidth=1.0)
     # 设置图形标题和坐标轴标签
     plt.title("")
     plt.xlabel("grad norm val")
-    plt.ylabel("num_samples")
+    plt.ylabel("num_samples ratio log ")
 
     plt.legend(fontsize=18)
+    plt.savefig('figure.png', dpi=600)
     # 显示图形
     plt.show()
+
     # '''
     # fig, ax = plt.subplots()
     # x = np.linspace(0, 9, 10)
@@ -138,6 +144,6 @@ def display():
 
 
 if __name__ == '__main__':
-    prepare_run()
-    # display()
+    # prepare_run()
+    display()
 

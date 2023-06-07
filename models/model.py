@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+from models.ResNets import *
 
 # Pytorch implementation of Temporal Convolutions (TC-ResNet).
 # Original code (Tensorflow) by Choi et al. at https://github.com/hyperconnect/TC-ResNet/blob/master/audio_nets/tc_resnet.py
@@ -150,6 +150,157 @@ class TCResNet8(nn.Module):
 
     def load(self,name="TCResNet8"):
         self.load_state_dict(torch.load("saved_model/"+name, map_location=lambda storage, loc: storage))
+
+
+
+
+'''
+ResNet18
+'''
+class BasicBlock(nn.Module):
+    def __init__(self, inchannel, outchannel, stride):
+        super(BasicBlock, self).__init__()
+        # normal block
+        self.left = nn.Sequential(
+            nn.Conv2d(inchannel, outchannel, kernel_size=3, stride=stride, padding=1, bias=False),
+            nn.BatchNorm2d(outchannel),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(outchannel, outchannel, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm2d(outchannel)
+        )
+
+        # identity mapping
+        # if the in channel does not match out channel, an additional convolution and batch normalization is needed
+        self.shortcut = nn.Sequential()
+        if stride != 1 or inchannel != outchannel:
+            self.shortcut = nn.Sequential(
+                nn.Conv2d(inchannel, outchannel, kernel_size=1, stride=stride, bias=False),
+                nn.BatchNorm2d(outchannel)
+            )
+    def forward(self, x):
+        out = self.left(x)
+        out = out + self.shortcut(x)
+        out = F.relu(out)
+
+        return out
+
+class ResNet18(torch.nn.Module):
+    def __init__(self, ResBlock, num_classes=10):
+        super(My_CNN, self).__init__()
+        self.inchannel = 64
+        self.conv1 = nn.Sequential(
+            nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm2d(64),
+            nn.ReLU()
+        )
+        self.layer1 = self.repeat_shortcut_block(ResBlock, channels=64, num_blocks=1, stride=1)
+        self.layer2 = self.repeat_shortcut_block(ResBlock, channels=128, num_blocks=2, stride=2)
+        self.layer3 = self.repeat_shortcut_block(ResBlock, channels=256, num_blocks=2, stride=2)
+        self.layer4 = self.repeat_shortcut_block(ResBlock, channels=512, num_blocks=2, stride=2)
+
+        self.early_fc_1 = nn.Linear(64, num_classes)
+        self.early_fc_2 = nn.Linear(128, num_classes)
+        self.early_fc_3 = nn.Linear(256, num_classes)
+        self.fc = nn.Linear(512, num_classes)
+
+    # repeat same residual block
+    def repeat_shortcut_block(self, block, channels, num_blocks, stride):
+        strides = [stride] + [1] * (num_blocks - 1)
+        layers = []
+        for stride in strides:
+            layers.append(block(self.inchannel, channels, stride))
+            self.inchannel = channels
+        return nn.Sequential(*layers)
+
+    def forward(self, x):
+
+        map1, out1 = self.forward_1(x)
+        map2, out2 = self.forward_2(x)
+        map3, out3 = self.forward_3(x)
+        map4, out4 = self.forward_full(x)
+
+        return [map1, map2, map3, map4],[out1, out2, out3, out4]
+
+
+    def forward_1(self, x):
+        out = self.conv1(x)
+        map = self.layer1(out)
+        ###
+        out = F.avg_pool2d(map, 32)
+        out = out.view(out.size(0), -1)
+        out = self.early_fc_1(out)
+        return map, out
+
+    def forward_2(self, x):
+        with torch.no_grad():
+            out = self.conv1(x)
+            out = self.layer1(out)
+        map = self.layer2(out)
+        out = F.avg_pool2d(map, 16)
+        out = out.view(out.size(0), -1)
+        out = self.early_fc_2(out)
+        return map, out
+
+    def forward_3(self, x):
+        with torch.no_grad():
+            out = self.conv1(x)
+            out = self.layer1(out)
+            out = self.layer2(out)
+        map = self.layer3(out)
+        out = F.avg_pool2d(map, 8)
+        out = out.view(out.size(0), -1)
+        out = self.early_fc_3(out)
+        return map, out
+
+    def forward_full(self, x):
+        with torch.no_grad():
+            out = self.conv1(x)
+            out = self.layer1(out)
+            out = self.layer2(out)
+            out = self.layer3(out)
+        map = self.layer4(out)
+        out = F.avg_pool2d(map, 4)
+        out = out.view(out.size(0), -1)
+        out = self.fc(out)
+        return map,out
+        #
+        # out = self.conv1(x)     # 64,32,32
+        # out = self.layer1(out)  # 64,32,32
+        # out = self.layer2(out)  # 128,16,16
+        # out = self.layer3(out)  # 256,8,8
+        # out = self.layer4(out)  # 512,4,4
+        # out = F.avg_pool2d(out, 4)
+        # out = out.view(out.size(0), -1)
+        # out = self.fc(out)
+        # return out
+    def save(self,name):
+        torch.save(self.state_dict(), "saved_model/"+name+".pt")
+
+    def load(self, name="saved_model/Res18.pt"):
+        self.load_state_dict(torch.load("saved_model/"+name, map_location=lambda storage, loc: storage))
+
+'''
+ResNet32
+'''
+import torch
+import torch.nn as nn
+
+
+
+
+
+
+# # 创建ResNet-32模型实例
+# model = ResNet32()
+# print(model)
+
+
+# 创建ResNet-32模型实例
+
+
+
+
+
 
 
 if __name__ == "__main__":

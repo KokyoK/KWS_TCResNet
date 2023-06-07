@@ -59,7 +59,7 @@ def get_all_data_length(root_dir):          # for debug
 
 
 
-def split_dataset(root_dir, word_list, speaker_list, split_pct=[0.5, 0.2, 0.3]):
+def split_dataset(root_dir, word_list, speaker_list, split_pct=[0.8, 0.2, 0]):
     """ Generates a list of paths for each sample and splits them into training, validation and test sets.
 
         Input(s):
@@ -272,6 +272,20 @@ class AudioPreprocessor():
         # print(o_data.shape,data[1])
         return o_data, data[1]
 
+def kws_loaders(root_dir, word_list, speaker_list,):
+    # Loading dataset
+    ap = AudioPreprocessor()  # Computes Log-Mel spectrogram
+    train_files, dev_files, test_files = split_dataset(root_dir, word_list, speaker_list)
+
+    train_data = SpeechDataset(train_files, "train", ap, word_list, speaker_list)
+    dev_data = SpeechDataset(dev_files, "dev", ap, word_list, speaker_list)
+    test_data = SpeechDataset(test_files, "test", ap, word_list, speaker_list)
+
+    train_dataloader = data.DataLoader(train_data, batch_size=16, shuffle=True)
+    dev_dataloader = data.DataLoader(dev_data, batch_size=1, shuffle=True)
+    test_dataloader = data.DataLoader(test_data, batch_size=1, shuffle=True)
+    # return [train_dataloader,dev_dataloader,test_dataloader]
+    return [train_dataloader,dev_dataloader]
 
 if __name__ == "__main__":
     # Test example
@@ -279,7 +293,7 @@ if __name__ == "__main__":
     # word_list = ['上升', '下降', '乐歌', '停止', '升高', '坐', '复位', '小乐', '站', '降低']
     # root_dir = "dataset/google_origin/"
     # word_list = ["yes", "no", "up", "down", "left", "right", "on", "off", "stop", "go", "silence"]
-    root_dir = "dataset/huawei_modify/WAV_new/"
+    root_dir = "../dataset/huawei_modify/WAV_new/"
     word_list = ['hey_celia', '支付宝扫一扫', '停止播放', '下一首', '播放音乐', '微信支付', '关闭降噪', '小艺小艺', '调小音量', '开启透传']
     speaker_list = [speaker for speaker in os.listdir("dataset/huawei_modify/WAV/") if speaker.startswith("A") ]
 

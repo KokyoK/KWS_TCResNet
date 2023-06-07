@@ -11,10 +11,10 @@ import torch.nn as nn
 import numpy as np
 import torchaudio
 import random
-import speech_dataset as sd
+from dataset_initializers import speech_dataset as sd
 import torch
 torch.manual_seed(42)
-from model import TCResNet8
+from models.model import TCResNet8
 import math
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'

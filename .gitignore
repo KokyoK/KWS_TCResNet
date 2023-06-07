@@ -2,5 +2,5 @@
 /saved_model/
 /input_samples/
 /dataset/
-/loader
-/loader_acc3
+/saved_statistics/loader
+/saved_statistics/loader_acc3
