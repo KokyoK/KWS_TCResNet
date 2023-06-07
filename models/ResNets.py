@@ -155,6 +155,19 @@ class ResNet(nn.Module):
         out = self.linear(out)
         return out
 
+
+    def save(self, is_onnx=0, name="ResNet34"):
+        if (is_onnx):
+            dummy_input = torch.randn(16, 40, 1, 101)
+            torch.onnx.export(self, dummy_input, "ResNet8.onnx", verbose=True, input_names=["input0"],
+                              output_names=["output0"])
+        else:
+            torch.save(self.state_dict(), "saved_model/resnet34/"+name)
+
+    def load(self,name="ResNet34"):
+        self.load_state_dict(torch.load("saved_model/resnet34/"+name, map_location=lambda storage, loc: storage))
+
+
 def resnet20():
     return ResNet(BasicBlock, [3, 3, 3])
 

@@ -183,7 +183,7 @@ def train(model,loaders,num_epoch):
 
         # Validation (1 epoch)
         model.eval()
-        model.mode = "eval"
+        # model.mode = "eval"
         total_infer_time = 0
 
         for batch_idx, (audio_data, label_kw) in enumerate(dev_dataloader):
@@ -232,8 +232,8 @@ def train(model,loaders,num_epoch):
         # f1_scores = f1_score(labels, torch.max(output.detach(), 1)[0], average=None, )
         # print(f1_scores)
         print("===========================================================================")
-        print("EPOCH #{}     | TRAIN KWS ACC: {:.2f}%\t| {:.2f}%\t |{:.2f}% |  TRAIN LOSS : {:.2f}".format(epoch, train_kw_accuracy[0], train_kw_accuracy[1],train_kw_accuracy[2],train_loss))
-        print("             | VAL KWS ACC :  {:.2f}%\t| {:.2f}%\t |{:.2f}% |  VAL LOSS   : {:.2f}".format(valid_kw_accuracy[0],valid_kw_accuracy[1],valid_kw_accuracy[2],valid_loss))
+        print("EPOCH #{}     | TRAIN ACC: {:.2f}%\t| {:.2f}%\t |{:.2f}% |  TRAIN LOSS : {:.2f}".format(epoch, train_kw_accuracy[0], train_kw_accuracy[1],train_kw_accuracy[2],train_loss))
+        print("             | VAL ACC :  {:.2f}%\t| {:.2f}%\t |{:.2f}% |  VAL LOSS   : {:.2f}".format(valid_kw_accuracy[0],valid_kw_accuracy[1],valid_kw_accuracy[2],valid_loss))
         # print("Validation path count:   ", path_count)
         # print("Validation set inference time:    ",total_infer_time/len(dev_dataloader.dataset))
         print("===========================================================================")
