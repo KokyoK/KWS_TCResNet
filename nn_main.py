@@ -45,12 +45,12 @@ if __name__ == "__main__":
     elif dataset_name=="cifar10":
         loaders = cifar10.cifar10_loaders()
         if TRAIN:
-            util.train(model,  loaders, NUM_EPOCH)
+            # util.train(model,  loaders, NUM_EPOCH)
+            util.train_layer_wise(model, loaders, NUM_EPOCH)
         else:
-            train, dev, test = sd.split_dataset(ROOT_DIR, WORD_LIST, SPEAKER_LIST)
-
-            # util.evaluate_testset(model_fp32, test_dataloader)
-            util.change_rate_evaluate(model_fp32, test_dataloader)
+            # train, dev, test = sd.split_dataset(ROOT_DIR, WORD_LIST, SPEAKER_LIST)
+            util.evaluate_testset(model,loaders[1])
+            # util.change_rate_evaluate(model_fp32, test_dataloader)
 
 
         
