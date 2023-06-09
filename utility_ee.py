@@ -120,7 +120,7 @@ def train(model,loaders,num_epoch):
 
     criterion = nn.CrossEntropyLoss()
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-4,weight_decay=1e-6)
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-3,weight_decay=1e-4)
     # Training
     step_idx = 0
 
@@ -247,7 +247,7 @@ def train(model,loaders,num_epoch):
             previous_valid_accuracy = valid_kw_accuracy
             print("Saving current model...")
             model.save()
-            model.save(is_onnx=0, name='e_{}_valacc_{:.3f}_{:.3f}_{:.3f}.pt'.format( epoch,valid_kw_accuracy[0],valid_kw_accuracy[1],valid_kw_accuracy[2]))
+            model.save(is_onnx=0, name='e__{}_valacc_{:.3f}_{:.3f}_{:.3f}.pt'.format( epoch,valid_kw_accuracy[0],valid_kw_accuracy[1],valid_kw_accuracy[2]))
             # model.save(is_onnx=0,name='saved_model/w{}b{}_e_{}_valacc_{:.3f}_valloss_{:.3f}_.pt'.format(md.qw,md.qa,epoch,valid_accuracy,valid_loss))
             # torch.save(quantized_model.state_dict(), 'saved_model/q_epoch_{}_valacc_{:.3f}_valloss_{:.3f}_.pth'.format(epoch,valid_accuracy,valid_loss))
        
