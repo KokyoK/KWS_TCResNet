@@ -24,7 +24,7 @@ SPEAKER_LIST = []
 cifar10_classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 ######################################################## ########################################
-NUM_EPOCH = 500
+NUM_EPOCH = 5
 
 
 if __name__ == "__main__":
@@ -46,7 +46,8 @@ if __name__ == "__main__":
         loaders = cifar10.cifar10_loaders()
         if TRAIN:
             # util.train(model,  loaders, NUM_EPOCH)
-            util.train_layer_wise(model, loaders, NUM_EPOCH)
+            # util.train_layer_wise(model, loaders, NUM_EPOCH)
+            util.train_classifier_wise(model, loaders, NUM_EPOCH)
         else:
             # train, dev, test = sd.split_dataset(ROOT_DIR, WORD_LIST, SPEAKER_LIST)
             util.evaluate_testset(model,loaders[1])

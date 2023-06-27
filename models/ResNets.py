@@ -125,8 +125,15 @@ class ResNet(nn.Module):
         # out2 = self.forward_full(x)
         # return [out0,out1, out2]
         ####### train_classifier_wise #################
-        out = self.forward_full(x)
-        return out
+        out = F.relu(self.bn1(self.conv1(x)))
+        feat0 = self.layer0(out)
+        feat1 = self.layer1(feat0)
+        out = self.layer2(feat1)
+        out = F.avg_pool2d(out, out.size()[3])
+        out = out.view(out.size(0), -1)
+        out = self.linear(out)
+        # out = self.forward_full(x)
+        return feat0, feat1, out
         # return out
 
     def forward_0(self, x):
@@ -210,16 +217,30 @@ def test(net):
 
 class res32_ec(nn.Module):
     def __init__(self, num_classes):
+        super(res32_ec, self).__init__()
         self.early_fc_0 = nn.Conv2d(in_channels=16, out_channels=num_classes, kernel_size=1, padding=0,
                             bias=False)
         self.early_fc_1 = nn.Conv2d(in_channels=32, out_channels=num_classes, kernel_size=1, padding=0,
                             bias=False)
         self.index = 0
-    def forward(self, x)
+    def forward(self, x):
         if (self.index == 0):
-            out = self.early_fc_0(x)
+            out = F.avg_pool2d(x, x.size()[3])
+            out = self.early_fc_0(out)
+            out = F.softmax(out, dim=1)
+            out = out.view(out.shape[0], -1)
         if(self.index == 1):
-            out = self.early_fc_1(x)
+            out = F.avg_pool2d(x, x.size()[3])
+            out = self.early_fc_1(out)
+            out = F.softmax(out, dim=1)
+            out = out.view(out.shape[0], -1)
+        return out
+
+    def save(self, is_onnx=0, name="ResNet34_EE"):
+        torch.save(self.state_dict(), "saved_model/resnet34/" + name)
+
+    def load(self, name="ResNet34"):
+        self.load_state_dict(torch.load("saved_model/resnet34/" + name, map_location=lambda storage, loc: storage))
             
 
 
