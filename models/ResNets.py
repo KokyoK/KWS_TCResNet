@@ -118,10 +118,15 @@ class ResNet(nn.Module):
         # out = F.avg_pool2d(out, out.size()[3])
         # out = out.view(out.size(0), -1)
         # out = self.linear(out)
-        out0 = self.forward_0(x)
-        out1 = self.forward_1(x)
-        out2 = self.forward_full(x)
-        return [out0,out1, out2]
+        
+        ####### train_layer_wise 
+        # out0 = self.forward_0(x)
+        # out1 = self.forward_1(x)
+        # out2 = self.forward_full(x)
+        # return [out0,out1, out2]
+        ####### train_classifier_wise #################
+        out = self.forward_full(x)
+        return out
         # return out
 
     def forward_0(self, x):
@@ -200,6 +205,24 @@ def test(net):
         total_params += np.prod(x.data.numpy().shape)
     print("Total number of params", total_params)
     print("Total layers", len(list(filter(lambda p: p.requires_grad and len(p.data.size())>1, net.parameters()))))
+
+
+
+class res32_ec(nn.Module):
+    def __init__(self, num_classes):
+        self.early_fc_0 = nn.Conv2d(in_channels=16, out_channels=num_classes, kernel_size=1, padding=0,
+                            bias=False)
+        self.early_fc_1 = nn.Conv2d(in_channels=32, out_channels=num_classes, kernel_size=1, padding=0,
+                            bias=False)
+        self.index = 0
+    def forward(self, x)
+        if (self.index == 0):
+            out = self.early_fc_0(x)
+        if(self.index == 1):
+            out = self.early_fc_1(x)
+            
+
+
 
 
 if __name__ == "__main__":
