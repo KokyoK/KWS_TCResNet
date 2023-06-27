@@ -427,7 +427,7 @@ def train_classifier_wise(model, loaders, num_epoch):
     for i_model in range(len(model_names)):
         previous_valid_accuracy = 0
         step_idx = 0
-        optimizer = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
+        optimizer = torch.optim.Adam(model.parameters(), lr=1e-4, weight_decay=1e-5)
         if i_model==0:
             cur_model = model
         else:
@@ -486,10 +486,9 @@ def train_classifier_wise(model, loaders, num_epoch):
                 valid_loss += loss.item() * audio_data.size(0)
                 b_hit = float(torch.sum(torch.argmax(out, 1) == label_kw).item())
                 ba = b_hit / float(audio_data.shape[0])
-                valid_kw_correct += b_hit
-                if (batch_idx % 100 == 0):
-                    print("{} | Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | ACC: {:.4f} |  ".format(
-                        model_names[i_model],epoch, step_idx, loss, ba))
+                if (batch_idx % 1000 == 0):
+                    print("{} | Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | ACC: {:.2f} |  ".format(
+                        model_names[i_model],epoch, step_idx, loss, ba*100))
                 valid_kw_correct += b_hit
                 step_idx += 1
                 # break

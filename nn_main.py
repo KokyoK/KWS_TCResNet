@@ -24,7 +24,7 @@ SPEAKER_LIST = []
 cifar10_classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 ######################################################## ########################################
-NUM_EPOCH = 5
+NUM_EPOCH = 500
 
 
 if __name__ == "__main__":
