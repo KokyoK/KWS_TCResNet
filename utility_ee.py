@@ -6,6 +6,7 @@ import torch.utils.data as data
 from dataset_initializers import speech_dataset as sd
 from models import model as md
 from models.ResNets import res32_ec
+from torch.optim import lr_scheduler
 
 # check if CUDA is available
 train_on_gpu = torch.cuda.is_available()
@@ -427,7 +428,8 @@ def train_classifier_wise(model, loaders, num_epoch):
     for i_model in range(len(model_names)):
         previous_valid_accuracy = 0
         step_idx = 0
-        optimizer = torch.optim.Adam(model.parameters(), lr=1e-4, weight_decay=1e-5)
+        optimizer = torch.optim.SGD(model.parameters(), lr = 1e-1, momentum=0.9, weight_decay=1e-4)
+        scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max = num_epoch * 300, eta_min=1e-3)
         if i_model==0:
             cur_model = model
         else:
@@ -444,7 +446,6 @@ def train_classifier_wise(model, loaders, num_epoch):
                     early_classifier.cuda()
                     audio_data = audio_data.cuda()
                     label_kw = label_kw.cuda()
-                optimizer.zero_grad()
                 outs = model(x=audio_data)
                 [feat0, feat1 ,out_b] = outs
                 if i_model == 0:
@@ -452,45 +453,47 @@ def train_classifier_wise(model, loaders, num_epoch):
                 else:
                     early_classifier.index = i_model - 1
                     out = early_classifier(outs[i_model - 1])
-
                 loss = criterion(out, label_kw)
-                with torch.autograd.set_detect_anomaly(True):
-                    loss.backward(retain_graph=True)
+                # with torch.autograd.set_detect_anomaly(True):
+                optimizer.zero_grad()
+                loss.backward()
                 optimizer.step()
+                scheduler.step()
                 train_loss += loss.item() * audio_data.size(0)
                 b_hit = float(torch.sum(torch.argmax(out, 1) == label_kw).item())
                 ba = b_hit / float(audio_data.shape[0])
                 train_kw_correct += b_hit
                 if (batch_idx % 100 == 0):
                     print(
-                        "{} | Epoch {} | Train step #{}   | Loss_ALL: {:.4f} | ACC: {:.2f}%\t|  ".format(
-                            model_names[i_model],epoch,step_idx,loss,ba*100))
+                        "{} | Epoch {} | Train step #{}   | Loss_ALL: {:.4f} | ACC: {:.2f}%\t| Learning Rate: {:.7f} ".format(
+                            model_names[i_model],epoch,step_idx,loss,ba*100, optimizer.state_dict()['param_groups'][0]['lr']))
                 # train_kw_correct += b_hit
                 step_idx += 1
                 # break
 
             # Validation (1 epoch)
             cur_model.eval()
-            for batch_idx, (audio_data, label_kw) in enumerate(dev_dataloader):
-                if train_on_gpu:
-                    audio_data = audio_data.cuda()
-                    label_kw = label_kw.cuda()
-                outs = model(x=audio_data)
-                [feat0, feat1 ,out_b] = outs
-                if i_model == 0:
-                    out = out_b
-                else:
-                    early_classifier.index = i_model - 1
-                    out = early_classifier(outs[i_model - 1])
-                loss = criterion(out, label_kw)
-                valid_loss += loss.item() * audio_data.size(0)
-                b_hit = float(torch.sum(torch.argmax(out, 1) == label_kw).item())
-                ba = b_hit / float(audio_data.shape[0])
-                if (batch_idx % 1000 == 0):
-                    print("{} | Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | ACC: {:.2f} |  ".format(
-                        model_names[i_model],epoch, step_idx, loss, ba*100))
-                valid_kw_correct += b_hit
-                step_idx += 1
+            with torch.no_grad():
+                for batch_idx, (audio_data, label_kw) in enumerate(dev_dataloader):
+                    if train_on_gpu:
+                        audio_data = audio_data.cuda()
+                        label_kw = label_kw.cuda()
+                    outs = model(x=audio_data)
+                    [feat0, feat1 ,out_b] = outs
+                    if i_model == 0:
+                        out = out_b
+                    else:
+                        early_classifier.index = i_model - 1
+                        out = early_classifier(outs[i_model - 1])
+                    loss = criterion(out, label_kw)
+                    valid_loss += loss.item() * audio_data.size(0)
+                    b_hit = float(torch.sum(torch.argmax(out, 1) == label_kw).item())
+                    ba = b_hit / float(audio_data.shape[0])
+                    if (batch_idx % 1000 == 0):
+                        print("{} | Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | ACC: {:.2f} |  ".format(
+                            model_names[i_model],epoch, step_idx, loss, ba*100))
+                    valid_kw_correct += b_hit
+                    step_idx += 1
                 # break
             # Loss statistics
             train_loss = train_loss / len(train_dataloader.dataset)
@@ -499,7 +502,7 @@ def train_classifier_wise(model, loaders, num_epoch):
             valid_kw_accuracy = 100.0 * (valid_kw_correct / len(dev_dataloader.dataset))
 
             print("===========================================================================")
-            print("{} | EPOCH #{}     | TRAIN ACC: {:.2f}%\t|  TRAIN LOSS : {:.2f}".format(
+            print("{} | EPOCH #{}     | TRAIN ACC: {:.2f}%\t|  TRAIN LOSS : {:.2f} |".format(
                 model_names[i_model],epoch,train_kw_accuracy,train_loss))
             print("                         | VAL ACC :  {:.2f}%\t|  VAL LOSS   : {:.2f}".format(
                 valid_kw_accuracy, valid_loss))
