@@ -531,4 +531,117 @@ def train_classifier_wise(model, loaders, num_epoch):
     evaluate_testset(model, loaders[1])
 
 
+def train_ee(model, loaders, num_epoch,ratios):
+    early_classifier = res32_ec(num_classes=10)
+    model.load("BACKBONE_e_1523_valacc_94.260_2000.pt")
+    early_classifier.load("EE1_e_1528_valacc_88.610_2000.pt")
+    early_classifier.train()
+    [train_dataloader, dev_dataloader] = loaders
+    criterion = nn.CrossEntropyLoss()
+    model_names = ["EE0", "EE1"]
+    previous_valid_accuracy = 0
+    step_idx = 0
+    optimizer = torch.optim.SGD(early_classifier.parameters(), lr=1e-1, momentum=0.9, weight_decay=1e-4)
+    scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epoch * 300, eta_min=1e-3)
+    for epoch in range(num_epoch):
+        train_loss = 0.0
+        valid_loss = 0.0
+        valid_kw_correct = 0
+        train_kw_correct = 0
+        for batch_idx, (audio_data, label_kw) in enumerate(train_dataloader):
+            [feat0, feat1, out_b] = model(x=audio_data)
+            early_classifier.index = 0
+            out0 = early_classifier(feat0)
+            batch_size = label_kw.shape[0]
+            idxes = torch.arange(0,  batch_size)
+            true_prob_0 = out0[idxes, label_kw]
+            sorted_prob, sorted_indices = true_prob_0.sort(dim=0,descending=True)
+            exit_indices = sorted_indices[:round(ratios[0] * batch_size)]
+            non_exit_indices = sorted_indices[round(ratios[0] * batch_size):]
+            exit_out = out0[exit_indices]
+            non_exit_out = out0[non_exit_indices]
+            loss_exit =1.2 * criterion(exit_out, label_kw[exit_indices])
+            loss_non_exit = criterion(non_exit_out, label_kw[non_exit_indices])
+            loss = loss_exit + loss_non_exit
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            scheduler.step()
+            train_loss += loss.item() * audio_data.size(0)
+            b_hit = float(torch.sum(torch.argmax(out0, 1) == label_kw).item())
+            ba = b_hit / float(audio_data.shape[0])
+            train_kw_correct += b_hit
+            if (batch_idx % 100 == 0):
+                print(
+                    "{} | Epoch {} | Train step #{}   | Loss_ALL: {:.4f} | ACC: {:.2f}%\t| Learning Rate: {:.7f} ".format(
+                        model_names[0], epoch, step_idx, loss, ba * 100,
+                        optimizer.state_dict()['param_groups'][0]['lr']))
+            # train_kw_correct += b_hit
+            step_idx += 1
+            # break
+
+        ############ eval ############
+        early_classifier.eval()
+        with torch.no_grad():
+            for batch_idx, (audio_data, label_kw) in enumerate(dev_dataloader):
+                if train_on_gpu:
+                    audio_data = audio_data.cuda()
+                    label_kw = label_kw.cuda()
+                outs = model(x=audio_data)
+                [feat0, feat1, out_b] = outs
+                out = early_classifier(feat0)
+
+
+                loss = criterion(out, label_kw)
+                valid_loss += loss.item() * audio_data.size(0)
+                b_hit = float(torch.sum(torch.argmax(out, 1) == label_kw).item())
+                ba = b_hit / float(audio_data.shape[0])
+                if (batch_idx % 100 == 0):
+                    print("{} | Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | ACC: {:.2f} |  ".format(
+                        model_names[0], epoch, step_idx, loss, ba * 100))
+                valid_kw_correct += b_hit
+                step_idx += 1
+            # break
+            # Loss statistics
+        train_loss = train_loss / len(train_dataloader.dataset)
+        valid_loss = valid_loss / len(dev_dataloader.dataset)
+        train_kw_accuracy = 100.0 * (train_kw_correct / len(train_dataloader.dataset))
+        valid_kw_accuracy = 100.0 * (valid_kw_correct / len(dev_dataloader.dataset))
+
+        print("===========================================================================")
+        print("{} | EPOCH #{}     | TRAIN ACC: {:.2f}%\t|  TRAIN LOSS : {:.2f} |".format(
+            model_names[0], epoch, train_kw_accuracy, train_loss))
+        print("                         | VAL ACC :  {:.2f}%\t|  VAL LOSS   : {:.2f}".format(
+            valid_kw_accuracy, valid_loss))
+        # print("Validation path count:   ", path_count)
+        # print("Validation set inference time:    ",total_infer_time/len(dev_dataloader.dataset))
+        print("===========================================================================")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
