@@ -549,6 +549,11 @@ def train_ee(model, loaders, num_epoch,ratios):
         valid_kw_correct = 0
         train_kw_correct = 0
         for batch_idx, (audio_data, label_kw) in enumerate(train_dataloader):
+            if train_on_gpu:
+                audio_data = audio_data.cuda()
+                label_kw = label_kw.cuda()
+                model.cuda()
+                early_classifier.cuda()
             [feat0, feat1, out_b] = model(x=audio_data)
             early_classifier.index = 0
             out0 = early_classifier(feat0)
