@@ -277,8 +277,10 @@ def train_layer_wise(model, loaders, num_epoch):
     previous_valid_accuracy = [0, 0, 0]
 
     for e_idx in range(e_count):
-        optimizer = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
-        for epoch in range(num_epoch):
+        optimizer = torch.optim.SGD(model.parameters(), lr=1e-1, momentum=0.9, weight_decay=1e-4)
+        scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epoch * 300, eta_min=1e-3)
+
+    for epoch in range(num_epoch):
             train_loss = 0.0
             valid_loss = 0.0
             valid_kw_correct = [0, 0, 0]
@@ -301,14 +303,15 @@ def train_layer_wise(model, loaders, num_epoch):
                 losses = [loss_0,loss_1,loss_2]
                 loss_full = loss_0 + loss_1 + loss_2
 
-                with torch.autograd.set_detect_anomaly(True):
+                # with torch.autograd.set_detect_anomaly(True):
                     # loss_full.backward(retain_graph=True)
-                    losses[e_idx].backward(retain_graph=True)
+                losses[e_idx].backward(retain_graph=True)
                     # loss_id.backward(retain_graph=True)
                     # loss_o.backward(retain_graph=True)
                 loss = losses[e_idx]
 
                 optimizer.step()
+                scheduler.step()
 
                 train_loss += loss.item() * audio_data.size(0)
                 ba = torch.zeros([e_count])

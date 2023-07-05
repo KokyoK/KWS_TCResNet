@@ -46,8 +46,8 @@ if __name__ == "__main__":
         loaders = cifar10.cifar10_loaders()
         if TRAIN:
             # util.train(model,  loaders, NUM_EPOCH)
-            # util.train_layer_wise(model, loaders, NUM_EPOCH)
-            util.train_classifier_wise(model, loaders, NUM_EPOCH)
+            util.train_layer_wise(model, loaders, NUM_EPOCH)
+            # util.train_classifier_wise(model, loaders, NUM_EPOCH)
             # util.train_ee(model, loaders, NUM_EPOCH,ratios=[0.6,0.3,0.1])
         else:
             # train, dev, test = sd.split_dataset(ROOT_DIR, WORD_LIST, SPEAKER_LIST)
