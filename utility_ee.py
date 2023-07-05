@@ -268,7 +268,6 @@ def train_layer_wise(model, loaders, num_epoch):
     # Enable GPU training
     if train_on_gpu:
         model.cuda()
-
     [train_dataloader, dev_dataloader] = loaders
     criterion = nn.CrossEntropyLoss()
 
@@ -428,12 +427,12 @@ def train_classifier_wise(model, loaders, num_epoch):
     for i_model in range(len(model_names)):
         previous_valid_accuracy = 0
         step_idx = 0
-        optimizer = torch.optim.SGD(model.parameters(), lr = 1e-1, momentum=0.9, weight_decay=1e-4)
-        scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max = num_epoch * 300, eta_min=1e-3)
         if i_model==0:
             cur_model = model
         else:
             cur_model = early_classifier
+        optimizer = torch.optim.SGD(cur_model.parameters(), lr = 1e-1, momentum=0.9, weight_decay=1e-4)
+        scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max = num_epoch * 300, eta_min=1e-3)
         for epoch in range(num_epoch):
             train_loss = 0.0
             valid_loss = 0.0
@@ -463,7 +462,7 @@ def train_classifier_wise(model, loaders, num_epoch):
                 b_hit = float(torch.sum(torch.argmax(out, 1) == label_kw).item())
                 ba = b_hit / float(audio_data.shape[0])
                 train_kw_correct += b_hit
-                if (batch_idx % 100 == 0):
+                if (batch_idx % 50 == 0):
                     print(
                         "{} | Epoch {} | Train step #{}   | Loss_ALL: {:.4f} | ACC: {:.2f}%\t| Learning Rate: {:.7f} ".format(
                             model_names[i_model],epoch,step_idx,loss,ba*100, optimizer.state_dict()['param_groups'][0]['lr']))
@@ -533,9 +532,10 @@ def train_classifier_wise(model, loaders, num_epoch):
 
 def train_ee(model, loaders, num_epoch,ratios):
     early_classifier = res32_ec(num_classes=10)
+    model.eval()
     model.load("BACKBONE_e_1523_valacc_94.260_2000.pt")
     # early_classifier.load("EE1_e_1528_valacc_88.610_2000.pt")
-    # early_classifier.train()
+    early_classifier.train()
     [train_dataloader, dev_dataloader] = loaders
     criterion = nn.CrossEntropyLoss()
     model_names = ["EE0", "EE1"]
@@ -550,6 +550,7 @@ def train_ee(model, loaders, num_epoch,ratios):
         valid_kw_correct = 0
         train_kw_correct = 0
         threshold = 0.2
+        early_classifier.train()
         for batch_idx, (audio_data, label_kw) in enumerate(train_dataloader):
             if train_on_gpu:
                 audio_data = audio_data.cuda()
@@ -590,7 +591,7 @@ def train_ee(model, loaders, num_epoch,ratios):
             b_hit = float(torch.sum(torch.argmax(out0, 1) == label_kw).item())
             ba = b_hit / float(audio_data.shape[0])
             train_kw_correct += b_hit
-            if (batch_idx % 1 == 0):
+            if (batch_idx % 50 == 0):
                 print(
                     "{} | Epoch {} | Train step #{}   | Loss_ALL: {:.4f} | ALL ACC: {:.2f}%\t| Exit Ratio {:.2f}% | Thresh {:.3f} Learning Rate: {:.7f} ".format(
                         model_names[0], epoch, step_idx, loss, ba * 100, thresh_idx/batch_size*100, threshold,

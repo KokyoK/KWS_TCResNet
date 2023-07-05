@@ -119,21 +119,41 @@ class ResNet(nn.Module):
         # out = out.view(out.size(0), -1)
         # out = self.linear(out)
         
-        ####### train_layer_wise 
+        ####### train_layer_wise 1
         # out0 = self.forward_0(x)
         # out1 = self.forward_1(x)
         # out2 = self.forward_full(x)
         # return [out0,out1, out2]
-        ####### train_classifier_wise #################
+        
+        # train_end2end 
         out = F.relu(self.bn1(self.conv1(x)))
         feat0 = self.layer0(out)
-        feat1 = self.layer1(feat0)
+        out0 = F.avg_pool2d(feat0, feat0.size()[3])
+        out0 = self.early_fc_0(out0)
+        out0 = F.softmax(out0, dim=1)
+        out0 = out0.view(out0.shape[0], -1)
+        # out0 = self.early_fc_0(feat0)
+        feat1 = self.layer1(feat1)
+        out1 = F.avg_pool2d(feat1, feat1.size()[3])
+        out1 = self.early_fc_0(out1)
+        out1 = F.softmax(out1, dim=1)
+        out1 = out0.view(out1.shape[0], -1)
+
         out = self.layer2(feat1)
         out = F.avg_pool2d(out, out.size()[3])
         out = out.view(out.size(0), -1)
         out = self.linear(out)
+        return [out0,out1, out2]
+        ####### train_classifier_wise #################
+        # out = F.relu(self.bn1(self.conv1(x)))
+        # feat0 = self.layer0(out)
+        # feat1 = self.layer1(feat0)
+        # out = self.layer2(feat1)
+        # out = F.avg_pool2d(out, out.size()[3])
+        # out = out.view(out.size(0), -1)
+        # out = self.linear(out)
         # out = self.forward_full(x)
-        return feat0, feat1, out
+        # return feat0, feat1, out
         # return out
 
     def forward_0(self, x):
