@@ -9,9 +9,10 @@ torch.manual_seed(42)
 def cifar10_loaders():
     transform1 = transforms.Compose(
         [transforms.ToTensor(),
-         transforms.RandomCrop(32, padding=4),
+        #  transforms.RandomCrop(32, padding=4),
          transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
-         transforms.RandomHorizontalFlip(p=0.5)])
+        #  transforms.RandomHorizontalFlip(p=0.5)
+         ])
     
     transform2 = transforms.Compose(
         [transforms.ToTensor(),
@@ -22,7 +23,7 @@ def cifar10_loaders():
     trainset = torchvision.datasets.CIFAR10(root='./../dataset', train=True,
                                             download=True, transform=transform1)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=128,
-                                              shuffle=True, num_workers=0)
+                                              shuffle=False, num_workers=0)
 
     # 加载测试数据集
     testset = torchvision.datasets.CIFAR10(root='./../dataset', train=False,
