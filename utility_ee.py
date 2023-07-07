@@ -257,7 +257,7 @@ def train(model,loaders,num_epoch):
         # scheduler.step()
 
     # Final test
-    evaluate_testset(model, test_dataloader)
+    evaluate_testset(model, dev_dataloader)
 
 
 def train_layer_wise(model, loaders, num_epoch):
@@ -419,9 +419,9 @@ def train_layer_wise(model, loaders, num_epoch):
             # scheduler.step()
 
     # Final test
-    evaluate_testset(model, test_dataloader)
+    evaluate_testset(model, dev_dataloader)
 
-def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.6,0.3,0.1]):
+def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.3,0.2]):
     """
     Trains TCResNet
     """
@@ -434,7 +434,8 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.6,0.3,0.1]):
 
     # Training
     step_idx = 0
-
+    thresholds = [0.3,0.3,0.3]
+    thresh_idxs = [0,0,0]
     previous_valid_accuracy = [0, 0, 0]
     model_names = ["EE0", "EE1", "FULL"]
     for e_idx in range(e_count):
@@ -446,9 +447,9 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.6,0.3,0.1]):
             valid_loss = 0.0
             valid_kw_correct = [0, 0, 0]
             train_kw_correct = [0, 0, 0]
-            threshold = 0.3
+
             model.train()
-            for batch_idx, (audio_data, label_kw) in enumerate(train_dataloader):
+            for batch_idx, (audio_data, label_kw) in enumerate(dev_dataloader):
                 if train_on_gpu:
                     audio_data = audio_data.cuda()
                     label_kw = label_kw.cuda()
@@ -458,25 +459,26 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.6,0.3,0.1]):
                 
                 # calculate threshold and partition the batch
                 batch_size = label_kw.shape[0]
-                idxes = torch.arange(0,  batch_size)
-                max_prob_0, _ = out.max(dim=1)
-                sorted_prob, sorted_indices = max_prob_0.sort(dim=0, descending=True)
-                exit_indices = sorted_indices[:round(ratios[0] * batch_size)]
-                # cur_thresh = out[exit_indices[-1]][label_kw[exit_indices[-1]]]
-                cur_thresh = out[exit_indices[-1]].max()
-                threshold = 0.9 * threshold + 0.1 * cur_thresh
-                thresh_idx = (sorted_prob > threshold).sum()
 
-                exit_indices = sorted_indices[:thresh_idx]
-                non_exit_indices = sorted_indices[thresh_idx:]
-                exit_out = out[exit_indices]
-                non_exit_out = out[non_exit_indices]
-                
+                # forward through all exit
+                ratio = cal_ratio(ratios, e_idx)
+                [thresholds[0], thresh_idxs[0]], [exit_out, non_exit_out], [exit_label, non_exit_label] \
+                    = partition_batch(out=out, label=label_kw, thresh=thresholds[e_idx], ratio=ratio)
+                # if not training the first layer
+                if (e_idx != 0):
+                    for i in range(1,e_count):
+                        # ratio = cal_ratio(ratios, e_idx)
+                        ratio = ratios[i]
+                        if non_exit_out.shape[0]!= 0:
+                            [thresholds[i], thresh_idxs[i]], [exit_out, non_exit_out], [exit_label, non_exit_label] \
+                                = partition_batch(out=non_exit_out, label=non_exit_label, thresh=thresholds[i], ratio=ratio)
+
+
                 # cal_loss
-                loss_exit = 0 if exit_out.shape[0]==0 else 0.6 * criterion(exit_out, label_kw[exit_indices])
-                loss_non_exit = 0 if non_exit_out.shape[0]==0 else 0.4*criterion(non_exit_out, label_kw[non_exit_indices])
+                loss_exit = 0 if exit_out.shape[0]==0 else criterion(exit_out, exit_label)
+                loss_non_exit = 0 if non_exit_out.shape[0]==0 else criterion(non_exit_out,non_exit_label)
                 # loss = criterion(out, label_kw)
-                loss = loss_exit + loss_non_exit
+                loss = 0.7 * loss_exit + 0.3 * loss_non_exit
                 # loss_0 = criterion(out0, label_kw)
                 # loss_1 = criterion(out1, label_kw)
                 # loss_2 = criterion(out2, label_kw)
@@ -500,10 +502,11 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.6,0.3,0.1]):
                 if (batch_idx % 50 == 0):
                     print(
                     "{} | Epoch {} | Train step #{}   | Loss_ALL: {:.4f} | ALL ACC: {:.2f}%  {:.2f}%  {:.2f}%\t| Exit Ratio {:.2f}% | Thresh {:.3f} Learning Rate: {:.7f} ".format(
-                        model_names[e_idx], epoch, step_idx, loss, ba[0], ba[1], ba[2], thresh_idx/batch_size*100, threshold,
+                        model_names[e_idx], epoch, step_idx, loss, ba[0], ba[1], ba[2], thresh_idxs[e_idx]/batch_size*100, thresholds[e_idx],
                         optimizer.state_dict()['param_groups'][0]['lr']))
                 # train_kw_correct += b_hit
                 step_idx += 1
+                # break
 
             # Validation (1 epoch)
             model.eval()
@@ -527,9 +530,9 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.6,0.3,0.1]):
 
                 max_prob_0,_ = out0.max(dim=1)
                 sorted_prob, sorted_indices = max_prob_0.sort(dim=0, descending=True)
-                thresh_idx = (sorted_prob > threshold).sum()
-                exit_indices = sorted_indices[:thresh_idx]
-                non_exit_indices = sorted_indices[thresh_idx:]
+                thresh_idxs[e_idx] = (sorted_prob > thresholds[e_idx]).sum()
+                exit_indices = sorted_indices[:thresh_idxs[e_idx]]
+                non_exit_indices = sorted_indices[thresh_idxs[e_idx]:]
                 exit_out = out0[exit_indices]
                 non_exit_out = out0[non_exit_indices]
 
@@ -562,6 +565,7 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.6,0.3,0.1]):
 
                 # valid_kw_correct += b_hit
                 step_idx += 1
+                # break
 
             # Loss statistics for current EPOCH
             train_loss = train_loss / len(train_dataloader.dataset)
@@ -580,7 +584,7 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.6,0.3,0.1]):
             # print(f1_scores)
             print("===========================================================================")
             print("{} | EPOCH #{}     | TRAIN ACC: {}%\t|  TRAIN LOSS : {:.2f} | Threshold : {:.4f}".format(
-                model_names[0], epoch, train_kw_accuracy,train_loss, threshold))
+                model_names[e_idx], epoch, train_kw_accuracy,train_loss, thresholds[e_idx]))
             for i in range(e_count):
                 print("            EXIT {} | Exit Ratio: {:.2f} | VAL ACC :  {:.2f}%\t | ACC_exit: {:.2f}%\t| ACC_non_exit {:.2f}%\t | VAL LOSS : {:.2f}".format(
                 i, valid_exit_ratio[i], valid_kw_accuracy[i], valid_acc_exit[i],valid_acc_non_exit[i], valid_loss))
@@ -608,7 +612,7 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.6,0.3,0.1]):
             # scheduler.step()
 
     # Final test
-    evaluate_testset(model, test_dataloader)
+    evaluate_testset(model, dev_dataloader)
 
 
 def train_classifier_wise(model, loaders, num_epoch):
@@ -853,8 +857,33 @@ def train_ee(model, loaders, num_epoch,ratios):
         print("===========================================================================")
 
 
+def partition_batch(out, label, thresh, ratio):
+    par_batch_size = out.shape[0]
+    max_prob_0, _ = out.max(dim=1)
+    sorted_prob, sorted_indices = max_prob_0.sort(dim=0, descending=True)
+    exit_indices = sorted_indices[:round(ratio * par_batch_size)]
+    # cur_thresh = out[exit_indices[-1]][label_kw[exit_indices[-1]]]
+    cur_thresh = out[exit_indices[-1]].max() if par_batch_size!=0 else thresh
+    threshold = 0.9 * thresh + 0.1 * cur_thresh
+    thresh_idx = (sorted_prob > threshold).sum()
 
+    exit_indices = sorted_indices[:thresh_idx]
+    non_exit_indices = sorted_indices[thresh_idx:]
+    exit_out = out[exit_indices]
+    non_exit_out = out[non_exit_indices]
+    exit_label = label[exit_indices]
+    non_exit_label = label[non_exit_indices]
+    return [threshold,thresh_idx], [exit_out, non_exit_out], [exit_label, non_exit_label]
 
+def cal_ratio(ratios,e_idx):
+    if e_idx ==0:
+        return ratios[0]
+    else:
+        ratio = 1
+        for i in range(e_idx-1):
+            ratio *= (1-ratios[i])
+        ratio *= ratios[e_idx]
+        return ratio
 
 
 
