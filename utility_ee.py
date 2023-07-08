@@ -421,7 +421,7 @@ def train_layer_wise(model, loaders, num_epoch):
     # Final test
     evaluate_testset(model, dev_dataloader)
 
-def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.3,0.2]):
+def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
     """
     Trains TCResNet
     """
@@ -449,7 +449,7 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.3,0.2]):
             train_kw_correct = [0, 0, 0]
 
             model.train()
-            for batch_idx, (audio_data, label_kw) in enumerate(dev_dataloader):
+            for batch_idx, (audio_data, label_kw) in enumerate(train_dataloader):
                 if train_on_gpu:
                     audio_data = audio_data.cuda()
                     label_kw = label_kw.cuda()
@@ -461,17 +461,17 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.3,0.2]):
                 batch_size = label_kw.shape[0]
 
                 # forward through all exit
-                ratio = cal_ratio(ratios, e_idx)
+                ratio = [0,ratios[0]]
                 [thresholds[0], thresh_idxs[0]], [exit_out, non_exit_out], [exit_label, non_exit_label] \
                     = partition_batch(out=out, label=label_kw, thresh=thresholds[e_idx], ratio=ratio)
                 # if not training the first layer
                 if (e_idx != 0):
                     for i in range(1,e_count):
                         # ratio = cal_ratio(ratios, e_idx)
-                        ratio = ratios[i]
+                        ratio = [ratios[i-1], ratios[i]]
                         if non_exit_out.shape[0]!= 0:
                             [thresholds[i], thresh_idxs[i]], [exit_out, non_exit_out], [exit_label, non_exit_label] \
-                                = partition_batch(out=non_exit_out, label=non_exit_label, thresh=thresholds[i], ratio=ratio)
+                                = partition_batch(out=out, label=label_kw, thresh=thresholds[i], ratio=ratio)
 
 
                 # cal_loss
@@ -513,7 +513,7 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.3,0.2]):
             # model.mode = "eval"
             total_infer_time = 0
             hit_exit = torch.zeros([e_count])   # 
-            exit_all = torch.zeros([e_count])   # count of current exit samples
+            exit_count = torch.zeros([e_count])   # count of current exit samples
             hit_non_exit = torch.zeros([e_count])
             valid_acc_exit = torch.zeros([e_count])
             valid_acc_non_exit = torch.zeros([e_count])
@@ -526,21 +526,19 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.3,0.2]):
                 [out0, out1, out2] = outs
                 
                 batch_size = label_kw.shape[0]
-                idxes = torch.arange(0, batch_size)
 
-                max_prob_0,_ = out0.max(dim=1)
-                sorted_prob, sorted_indices = max_prob_0.sort(dim=0, descending=True)
-                thresh_idxs[e_idx] = (sorted_prob > thresholds[e_idx]).sum()
-                exit_indices = sorted_indices[:thresh_idxs[e_idx]]
-                non_exit_indices = sorted_indices[thresh_idxs[e_idx]:]
-                exit_out = out0[exit_indices]
-                non_exit_out = out0[non_exit_indices]
+                # forward through all exit
 
-                b_exit_hit = float(torch.sum(torch.argmax(exit_out, 1) == label_kw[exit_indices]).item())
-                b_non_exit_hit = float(torch.sum(torch.argmax(non_exit_out, 1) == label_kw[non_exit_indices]).item())
-                exit_all[e_idx] += exit_out.shape[0]
-                hit_exit[e_idx] += b_exit_hit
-                hit_non_exit[e_idx] += b_non_exit_hit
+                exit_outs, exit_labels, exit_indices = infer_batch(outs, label_kw, thresholds)
+
+                b_exit_hit = []
+                b_non_exit_hit=[]
+                for i in range(e_count):
+                    b_exit_hit.append(float(torch.sum(torch.argmax(exit_outs[i], 1) == exit_labels[i]).item()))
+                    # b_non_exit_hit = float(torch.sum(torch.argmax(non_exit_out, 1) == non_exit_label).item())
+                    exit_count[i] += exit_outs[i].shape[0]
+                    hit_exit[i] += b_exit_hit[i]
+                    # hit_non_exit[i] += b_non_exit_hit[i]
 
                 # cal_loss
                 loss_0 = criterion(out0, label_kw)
@@ -572,10 +570,11 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.3,0.2]):
             valid_loss = valid_loss / len(dev_dataloader.dataset)
             train_kw_accuracy = torch.zeros([e_count])
             valid_kw_accuracy = torch.zeros([e_count])
-            valid_acc_exit[e_idx] = 100 * hit_exit[e_idx] / exit_all[e_idx]
-            valid_acc_non_exit[e_idx] = -1 if(len(dev_dataloader.dataset) - exit_all[e_idx])==0 \
-                else 100 * hit_non_exit[e_idx] / (len(dev_dataloader.dataset) - exit_all[e_idx])
-            valid_exit_ratio[e_idx] = exit_all[e_idx] / len(dev_dataloader.dataset) 
+            valid_acc_exit[e_idx] = 100 * hit_exit[e_idx] / exit_count[e_idx]
+            valid_acc_non_exit[e_idx] = -1 if(len(dev_dataloader.dataset) - exit_count[e_idx])==0 \
+                else 100 * hit_non_exit[e_idx] / (len(dev_dataloader.dataset) - exit_count[e_idx])
+            valid_exit_ratio[e_idx] = exit_count[e_idx] / len(dev_dataloader.dataset)
+            infer_valid_acc = torch.sum(hit_exit) / len(dev_dataloader.dataset)
             for i in range(e_count):
                 train_kw_accuracy[i] = 100.0 * (train_kw_correct[i] / len(train_dataloader.dataset))
                 valid_kw_accuracy[i] = 100.0 * (valid_kw_correct[i] / len(dev_dataloader.dataset))
@@ -585,6 +584,7 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.3,0.2]):
             print("===========================================================================")
             print("{} | EPOCH #{}     | TRAIN ACC: {}%\t|  TRAIN LOSS : {:.2f} | Threshold : {:.4f}".format(
                 model_names[e_idx], epoch, train_kw_accuracy,train_loss, thresholds[e_idx]))
+            print("  | INFER ACC: {:.2f}%\t| ".format(infer_valid_acc*100))
             for i in range(e_count):
                 print("            EXIT {} | Exit Ratio: {:.2f} | VAL ACC :  {:.2f}%\t | ACC_exit: {:.2f}%\t| ACC_non_exit {:.2f}%\t | VAL LOSS : {:.2f}".format(
                 i, valid_exit_ratio[i], valid_kw_accuracy[i], valid_acc_exit[i],valid_acc_non_exit[i], valid_loss))
@@ -861,7 +861,7 @@ def partition_batch(out, label, thresh, ratio):
     par_batch_size = out.shape[0]
     max_prob_0, _ = out.max(dim=1)
     sorted_prob, sorted_indices = max_prob_0.sort(dim=0, descending=True)
-    exit_indices = sorted_indices[:round(ratio * par_batch_size)]
+    exit_indices = sorted_indices[round(ratio[0] * par_batch_size):round(ratio[1] * par_batch_size)]
     # cur_thresh = out[exit_indices[-1]][label_kw[exit_indices[-1]]]
     cur_thresh = out[exit_indices[-1]].max() if par_batch_size!=0 else thresh
     threshold = 0.9 * thresh + 0.1 * cur_thresh
@@ -875,15 +875,35 @@ def partition_batch(out, label, thresh, ratio):
     non_exit_label = label[non_exit_indices]
     return [threshold,thresh_idx], [exit_out, non_exit_out], [exit_label, non_exit_label]
 
-def cal_ratio(ratios,e_idx):
-    if e_idx ==0:
-        return ratios[0]
-    else:
-        ratio = 1
-        for i in range(e_idx-1):
-            ratio *= (1-ratios[i])
-        ratio *= ratios[e_idx]
-        return ratio
+def infer_batch(outs, label, thresholds):
+    exit_outs=[]
+    exit_labels=[]
+    exit_indices=[]
+    for i in range(len(outs)):
+        out = outs[i]
+        max_prob,_ = out.max(dim=1)
+        for index in exit_indices:
+                max_prob[index] = 0
+        if i == (len(outs)-1):
+            t = max_prob >0
+        else:
+            t = max_prob>=thresholds[i]
+        exit_index = torch.squeeze(torch.nonzero(t))
+        exit_indices.append(exit_index)
+        exit_outs.append(out[exit_index])
+        exit_labels.append(label[exit_index])
+
+    return exit_outs, exit_labels, exit_indices
+
+# def cal_ratio(ratios,e_idx):
+#     if e_idx ==0:
+#         return ratios[0]
+#     else:
+#         ratio = 1
+#         for i in range(e_idx-1):
+#             ratio *= (1-ratios[i])
+#         ratio *= ratios[e_idx]
+#         return ratio
 
 
 
