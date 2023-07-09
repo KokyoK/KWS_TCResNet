@@ -469,16 +469,16 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
                     for i in range(1,e_count):
                         # ratio = cal_ratio(ratios, e_idx)
                         ratio = [ratios[i-1], ratios[i]]
-                        if non_exit_out.shape[0]!= 0:
-                            [thresholds[i], thresh_idxs[i]], [exit_out, non_exit_out], [exit_label, non_exit_label] \
-                                = partition_batch(out=out, label=label_kw, thresh=thresholds[i], ratio=ratio)
+                        # if non_exit_out.shape[0]!= 0:
+                        [thresholds[i], thresh_idxs[i]], [exit_out, non_exit_out], [exit_label, non_exit_label] \
+                            = partition_batch(out=out, label=label_kw, thresh=thresholds[i], ratio=ratio)
 
 
                 # cal_loss
                 loss_exit = 0 if exit_out.shape[0]==0 else criterion(exit_out, exit_label)
                 loss_non_exit = 0 if non_exit_out.shape[0]==0 else criterion(non_exit_out,non_exit_label)
                 # loss = criterion(out, label_kw)
-                loss = 0.7 * loss_exit + 0.3 * loss_non_exit
+                loss = 0.6 * loss_exit + 0.4 * loss_non_exit
                 # loss_0 = criterion(out0, label_kw)
                 # loss_1 = criterion(out1, label_kw)
                 # loss_2 = criterion(out2, label_kw)
@@ -534,10 +534,14 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
                 b_exit_hit = []
                 b_non_exit_hit=[]
                 for i in range(e_count):
-                    b_exit_hit.append(float(torch.sum(torch.argmax(exit_outs[i], 1) == exit_labels[i]).item()))
+                    if (exit_outs[i].dim()==2):
+                        # print(exit_outs[i].shape)
+                        b_exit_hit.append(float(torch.sum(torch.argmax(exit_outs[i], 1) == exit_labels[i]).item()))
+                        hit_exit[i] += b_exit_hit[i]
+                        exit_count[i] += exit_outs[i].shape[0]
+                    else:           # batch has output
+                        b_exit_hit.append(torch.Tensor(0))
                     # b_non_exit_hit = float(torch.sum(torch.argmax(non_exit_out, 1) == non_exit_label).item())
-                    exit_count[i] += exit_outs[i].shape[0]
-                    hit_exit[i] += b_exit_hit[i]
                     # hit_non_exit[i] += b_non_exit_hit[i]
 
                 # cal_loss
@@ -570,24 +574,26 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
             valid_loss = valid_loss / len(dev_dataloader.dataset)
             train_kw_accuracy = torch.zeros([e_count])
             valid_kw_accuracy = torch.zeros([e_count])
-            valid_acc_exit[e_idx] = 100 * hit_exit[e_idx] / exit_count[e_idx]
+            
             valid_acc_non_exit[e_idx] = -1 if(len(dev_dataloader.dataset) - exit_count[e_idx])==0 \
                 else 100 * hit_non_exit[e_idx] / (len(dev_dataloader.dataset) - exit_count[e_idx])
-            valid_exit_ratio[e_idx] = exit_count[e_idx] / len(dev_dataloader.dataset)
+            
             infer_valid_acc = torch.sum(hit_exit) / len(dev_dataloader.dataset)
             for i in range(e_count):
                 train_kw_accuracy[i] = 100.0 * (train_kw_correct[i] / len(train_dataloader.dataset))
                 valid_kw_accuracy[i] = 100.0 * (valid_kw_correct[i] / len(dev_dataloader.dataset))
+                valid_acc_exit[i] = 100 * hit_exit[i] / exit_count[i]
+                valid_exit_ratio[i] = exit_count[i] / len(dev_dataloader.dataset)
             # print(output.shape)
             # f1_scores = f1_score(labels, torch.max(output.detach(), 1)[0], average=None, )
             # print(f1_scores)
             print("===========================================================================")
-            print("{} | EPOCH #{}     | TRAIN ACC: {}%\t|  TRAIN LOSS : {:.2f} | Threshold : {:.4f}".format(
-                model_names[e_idx], epoch, train_kw_accuracy,train_loss, thresholds[e_idx]))
+            print("{} | EPOCH #{}     | TRAIN ACC: {}%\t|  TRAIN LOSS : {:.2f} |".format(
+                model_names[e_idx], epoch, train_kw_accuracy,train_loss))
             print("  | INFER ACC: {:.2f}%\t| ".format(infer_valid_acc*100))
             for i in range(e_count):
-                print("            EXIT {} | Exit Ratio: {:.2f} | VAL ACC :  {:.2f}%\t | ACC_exit: {:.2f}%\t| ACC_non_exit {:.2f}%\t | VAL LOSS : {:.2f}".format(
-                i, valid_exit_ratio[i], valid_kw_accuracy[i], valid_acc_exit[i],valid_acc_non_exit[i], valid_loss))
+                print("            EXIT {} | VAL ACC :  {:.2f}%\t ｜ Exit Ratio: {:.2f}% | Thresholds: {:.4f} |ACC_exit: {:.2f}%\t| ACC_non_exit {:.2f}%\t | VAL LOSS : {:.2f}".format(
+                i,  valid_kw_accuracy[i],valid_exit_ratio[i]*100, thresholds[i], valid_acc_exit[i],valid_acc_non_exit[i], valid_loss))
             # print("Validation path count:   ", path_count)
             # print("Validation set inference time:    ",total_infer_time/len(dev_dataloader.dataset))
             print("===========================================================================")
