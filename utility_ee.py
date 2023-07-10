@@ -459,10 +459,10 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
                 
                 # calculate threshold and partition the batch
                 batch_size = label_kw.shape[0]
-
+                temp_thresholds=[0,0,0]
                 # forward through all exit
                 ratio = [0,ratios[0]]
-                [thresholds[0], thresh_idxs[0]], [exit_out, non_exit_out], [exit_label, non_exit_label] \
+                [temp_thresholds[0], thresh_idxs[0]], [exit_out, non_exit_out], [exit_label, non_exit_label] \
                     = partition_batch(out=out, label=label_kw, thresh=thresholds[e_idx], ratio=ratio)
                 # if not training the first layer
                 if (e_idx != 0):
@@ -470,8 +470,9 @@ def train_layer_wise_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
                         # ratio = cal_ratio(ratios, e_idx)
                         ratio = [ratios[i-1], ratios[i]]
                         # if non_exit_out.shape[0]!= 0:
-                        [thresholds[i], thresh_idxs[i]], [exit_out, non_exit_out], [exit_label, non_exit_label] \
+                        [temp_thresholds[i], thresh_idxs[i]], [exit_out, non_exit_out], [exit_label, non_exit_label] \
                             = partition_batch(out=out, label=label_kw, thresh=thresholds[i], ratio=ratio)
+                thresholds[e_idx] = temp_thresholds[e_idx]
 
 
                 # cal_loss
