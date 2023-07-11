@@ -259,6 +259,375 @@ def train(model,loaders,num_epoch):
     # Final test
     evaluate_testset(model, dev_dataloader)
 
+def train_end_to_end(model, loaders, num_epoch):
+    """
+    Trains TCResNet
+    """
+
+    # Enable GPU training
+    if train_on_gpu:
+        model.cuda()
+    [train_dataloader, dev_dataloader] = loaders
+    criterion = nn.CrossEntropyLoss()
+
+    # Training
+    step_idx = 0
+
+    previous_valid_accuracy = [0, 0, 0]
+
+
+    optimizer = torch.optim.SGD(model.parameters(), lr=1e-1, momentum=0.9, weight_decay=1e-4)
+    scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epoch * 300, eta_min=1e-3)
+    for epoch in range(num_epoch):
+        train_loss = 0.0
+        valid_loss = 0.0
+        valid_kw_correct = [0, 0, 0]
+        train_kw_correct = [0, 0, 0]
+        model.train()
+        for batch_idx, (audio_data, label_kw) in enumerate(train_dataloader):
+            if train_on_gpu:
+                audio_data = audio_data.cuda()
+                label_kw = label_kw.cuda()
+
+            optimizer.zero_grad()
+
+            outs = model(x=audio_data)
+            [out0, out1, out2] = outs
+            # cal_loss
+
+            loss_0 = criterion(out0, label_kw)
+            loss_1 = criterion(out1, label_kw)
+            loss_2 = criterion(out2, label_kw)
+            losses = [loss_0,loss_1,loss_2]
+            loss = loss_0 + loss_1 + loss_2
+
+            # with torch.autograd.set_detect_anomaly(True):
+                # loss_full.backward(retain_graph=True)
+            # losses[e_idx].backward(retain_graph=True)
+                # loss_id.backward(retain_graph=True)
+                # loss_o.backward(retain_graph=True)
+            # loss = losses[e_idx]
+            loss_0.backward(retain_graph=True)
+            loss_1.backward(retain_graph=True)
+            loss_2.backward()
+
+            optimizer.step()
+            scheduler.step()
+
+            train_loss += loss.item() * audio_data.size(0)
+            ba = torch.zeros([e_count])
+            b_hit = torch.zeros([e_count])
+            for i in range(e_count):
+                b_hit[i] = float(torch.sum(torch.argmax(outs[i], 1) == label_kw).item())
+                ba[i] = b_hit[i] / float(audio_data.shape[0])
+                train_kw_correct[i] += b_hit[i]
+
+            if (batch_idx % 50 == 0):
+                print(
+                    "Epoch {} | Train step #{}   | Loss_ALL: {:.4f} | ACC: {:.4f} \t| {:.4f}\t| {:.4f}|  ".format(epoch,
+                                                                                                                    step_idx,
+                                                                                                                    loss,
+                                                                                                                    ba[0],
+                                                                                                                    ba[1],
+                                                                                                                    ba[
+                                                                                                                        2]))
+            # train_kw_correct += b_hit
+            step_idx += 1
+
+        # Validation (1 epoch)
+        model.eval()
+        # model.mode = "eval"
+        total_infer_time = 0
+
+        for batch_idx, (audio_data, label_kw) in enumerate(dev_dataloader):
+            if train_on_gpu:
+                audio_data = audio_data.cuda()
+                label_kw = label_kw.cuda()
+
+            optimizer.zero_grad()
+
+            outs = model(x=audio_data)
+            [out0, out1, out2] = outs
+            # cal_loss
+
+            loss_0 = criterion(out0, label_kw)
+            loss_1 = criterion(out1, label_kw)
+            loss_2 = criterion(out2, label_kw)
+
+            loss_full = loss_0 + loss_1 + loss_2
+            loss = loss_full
+            valid_loss += loss.item() * audio_data.size(0)
+            ba = torch.zeros([e_count])
+            b_hit = torch.zeros([e_count])
+            for i in range(e_count):
+                b_hit[i] = float(torch.sum(torch.argmax(outs[i], 1) == label_kw).item())
+                ba[i] = b_hit[i] / float(audio_data.shape[0])
+                valid_kw_correct[i] += b_hit[i]
+
+            if (batch_idx % 50 == 0):
+                print("Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | ACC: {:.4f} \t| {:.4f}\t| {:.4f}\t|  ".format(
+                     epoch, step_idx, loss, ba[0], ba[1], ba[2]))
+
+            # valid_kw_correct += b_hit
+            step_idx += 1
+
+        # Loss statistics
+        train_loss = train_loss / len(train_dataloader.dataset)
+        valid_loss = valid_loss / len(dev_dataloader.dataset)
+        train_kw_accuracy = torch.zeros([e_count])
+        valid_kw_accuracy = torch.zeros([e_count])
+        for i in range(e_count):
+            train_kw_accuracy[i] = 100.0 * (train_kw_correct[i] / len(train_dataloader.dataset))
+            valid_kw_accuracy[i] = 100.0 * (valid_kw_correct[i] / len(dev_dataloader.dataset))
+        # print(output.shape)
+        # f1_scores = f1_score(labels, torch.max(output.detach(), 1)[0], average=None, )
+        # print(f1_scores)
+        print("===========================================================================")
+        print(" EPOCH #{}     | TRAIN ACC: {:.2f}%\t| {:.2f}%\t |{:.2f}% |  TRAIN LOSS : {:.2f}".format(epoch,
+                                                                                                        train_kw_accuracy[
+                                                                                                            0],
+                                                                                                        train_kw_accuracy[
+                                                                                                            1],
+                                                                                                        train_kw_accuracy[
+                                                                                                            2],
+                                                                                                        train_loss))
+        print("                         | VAL ACC :  {:.2f}%\t| {:.2f}%\t |{:.2f}% |  VAL LOSS   : {:.2f}".format(
+            valid_kw_accuracy[0], valid_kw_accuracy[1], valid_kw_accuracy[2], valid_loss))
+        # print("Validation path count:   ", path_count)
+        # print("Validation set inference time:    ",total_infer_time/len(dev_dataloader.dataset))
+        print("===========================================================================")
+        ##################### 看要不要存
+        save = 0
+        # for i in range(e_count):
+        if (valid_kw_accuracy[2] > previous_valid_accuracy[2]):
+            save = 1
+
+        if (save == 1):
+            previous_valid_accuracy = valid_kw_accuracy
+            print("Saving current model...")
+            model.save()
+            model.save(is_onnx=0, name='e2e_{}_valacc_{:.3f}_{:.3f}_{:.3f}.pt'.format(
+                                                                    epoch, valid_kw_accuracy[0],
+                                                                                    valid_kw_accuracy[1],
+                                                                                    valid_kw_accuracy[2]))
+            # model.save(is_onnx=0,name='saved_model/w{}b{}_e_{}_valacc_{:.3f}_valloss_{:.3f}_.pt'.format(md.qw,md.qa,epoch,valid_accuracy,valid_loss))
+            # torch.save(quantized_model.state_dict(), 'saved_model/q_epoch_{}_valacc_{:.3f}_valloss_{:.3f}_.pth'.format(epoch,valid_accuracy,valid_loss))
+
+        # Update scheduler (for decaying learning rate)
+        # scheduler.step()
+
+    # Final test
+    evaluate_testset(model, dev_dataloader)
+
+def train_end_to_end_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
+    """
+    Trains TCResNet
+    """
+
+    # Enable GPU training
+    if train_on_gpu:
+        model.cuda()
+    [train_dataloader, dev_dataloader] = loaders
+    criterion = nn.CrossEntropyLoss()
+
+    # Training
+    step_idx = 0
+    thresholds = [0.3,0.3,0.3]
+    thresh_idxs = [0,0,0]
+    previous_valid_accuracy = [0, 0, 0]
+    model_names = ["EE0", "EE1", "FULL"]
+   
+    optimizer = torch.optim.SGD(model.parameters(), lr=1e-1, momentum=0.9, weight_decay=1e-4)
+    scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epoch * 300, eta_min=1e-3)
+
+    for epoch in range(num_epoch):
+        train_loss = 0.0
+        valid_loss = 0.0
+        valid_kw_correct = [0, 0, 0]
+        train_kw_correct = [0, 0, 0]
+        
+        exit_outs = [0, 0, 0]
+        non_exit_outs = [0, 0, 0]
+        exit_labels = [0, 0, 0]
+        non_exit_labels = [0, 0, 0]
+        
+        model.train()
+        for batch_idx, (audio_data, label_kw) in enumerate(train_dataloader):
+            if train_on_gpu:
+                audio_data = audio_data.cuda()
+                label_kw = label_kw.cuda()
+            outs = model(x=audio_data)
+            # [out0, out1, out2] = outs
+            # out = outs[e_idx]
+            optimizer.zero_grad()
+            # calculate threshold and partition the batch
+            batch_size = label_kw.shape[0]
+            temp_thresholds=[0,0,0]
+            # forward through all exit
+            ratio = [0,ratios[0]]
+            [temp_thresholds[0], thresh_idxs[0]], [exit_outs[0], non_exit_outs[0]], [exit_labels[0], non_exit_labels[0]] \
+                = partition_batch(out=outs[0], label=label_kw, thresh=thresholds[0], ratio=ratio)
+            for i in range(1,e_count):
+                # ratio = cal_ratio(ratios, e_idx)
+                ratio = [ratios[i-1], ratios[i]]
+                # if non_exit_out.shape[0]!= 0:
+                [temp_thresholds[i], thresh_idxs[i]], [exit_outs[i], non_exit_outs[i]], [exit_labels[i], non_exit_labels[i]] \
+                    = partition_batch(out=outs[i], label=label_kw, thresh=thresholds[i], ratio=ratio)
+            # cal_loss
+                loss_exit = 0 if exit_outs[i].shape[0]==0 else criterion(exit_outs[i], exit_labels[i])
+                loss_non_exit = 0 if non_exit_outs[i].shape[0]==0 else criterion(non_exit_outs[i],non_exit_labels[i])
+                # loss = criterion(out, label_kw)
+                loss = 0.6 * loss_exit + 0.4 * loss_non_exit
+                loss.backward(retain_graph=True if i<(e_count-1) else False)
+                
+            # loss_0 = criterion(out0, label_kw)
+            # loss_1 = criterion(out1, label_kw)
+            # loss_2 = criterion(out2, label_kw)
+            # losses = [loss_0,loss_1,loss_2]
+            # loss_full = loss_0 + loss_1 + loss_2
+            # loss = losses[e_idx]
+            thresholds = temp_thresholds
+            
+            
+            
+            optimizer.step()
+            scheduler.step()
+
+            train_loss += loss.item() * audio_data.size(0)
+            ba = torch.zeros([e_count])
+            b_hit = torch.zeros([e_count])
+            for i in range(e_count):
+                b_hit[i] = float(torch.sum(torch.argmax(outs[i], 1) == label_kw).item())
+                ba[i] = b_hit[i] / float(audio_data.shape[0]) * 100
+                train_kw_correct[i] += b_hit[i]
+
+            if (batch_idx % 200 == 0):
+                print(
+                "| Epoch {} | Train step #{}   | Loss_ALL: {:.4f} | Learning Rate: {:.7f} ".format(
+                     epoch, step_idx, loss,
+                    optimizer.state_dict()['param_groups'][0]['lr']))
+                for i in range(e_count):
+                    print("     | ACC: {:.2f}% \t| Exit Ratio {:.2f}% \t| Threshold {:.4f}".format(
+                        ba[i],thresh_idxs[i]/batch_size*100, thresholds[i])) 
+            # train_kw_correct += b_hit
+            step_idx += 1
+            # break
+
+        # Validation (1 epoch)
+        model.eval()
+        # model.mode = "eval"
+        total_infer_time = 0
+        hit_exit = torch.zeros([e_count])   # 
+        exit_count = torch.zeros([e_count])   # count of current exit samples
+        hit_non_exit = torch.zeros([e_count])
+        valid_acc_exit = torch.zeros([e_count])
+        valid_acc_non_exit = torch.zeros([e_count])
+        valid_exit_ratio = torch.zeros([e_count])
+        for batch_idx, (audio_data, label_kw) in enumerate(dev_dataloader):
+            if train_on_gpu:
+                audio_data = audio_data.cuda()
+                label_kw = label_kw.cuda()
+            outs = model(x=audio_data)
+            [out0, out1, out2] = outs
+            
+            batch_size = label_kw.shape[0]
+
+            # forward through all exit
+
+            exit_outs, exit_labels, exit_indices = infer_batch(outs, label_kw, thresholds)
+
+            b_exit_hit = []
+            b_non_exit_hit=[]
+            for i in range(e_count):
+                if (exit_outs[i].dim()==2):
+                    # print(exit_outs[i].shape)
+                    b_exit_hit.append(float(torch.sum(torch.argmax(exit_outs[i], 1) == exit_labels[i]).item()))
+                    hit_exit[i] += b_exit_hit[i]
+                    exit_count[i] += exit_outs[i].shape[0]
+                else:           # batch has output
+                    b_exit_hit.append(torch.Tensor(0))
+                # b_non_exit_hit = float(torch.sum(torch.argmax(non_exit_out, 1) == non_exit_label).item())
+                # hit_non_exit[i] += b_non_exit_hit[i]
+
+            # cal_loss
+            loss_0 = criterion(out0, label_kw)
+            loss_1 = criterion(out1, label_kw)
+            loss_2 = criterion(out2, label_kw)
+
+            loss_full = loss_0 + loss_1 + loss_2
+            # loss = loss_full
+            loss = criterion(out0, label_kw)
+
+            valid_loss += loss.item() * audio_data.size(0)
+            ba = torch.zeros([e_count])
+            b_hit = torch.zeros([e_count])
+            for i in range(e_count):
+                b_hit[i] = float(torch.sum(torch.argmax(outs[i], 1) == label_kw).item())
+                ba[i] = b_hit[i] / float(audio_data.shape[0])*100
+                valid_kw_correct[i] += b_hit[i]
+
+            if (batch_idx % 50 == 0):
+                print("| Epoch {} | Valid step #{}   | Loss_ALL: {:.4f}  | ACC: {:.2f} {:.2f} {:.2f}|  ".format(
+                     epoch, step_idx, loss, ba[0], ba[1],ba[2]))
+
+            # valid_kw_correct += b_hit
+            step_idx += 1
+            # break
+
+        # Loss statistics for current EPOCH
+        train_loss = train_loss / len(train_dataloader.dataset)
+        valid_loss = valid_loss / len(dev_dataloader.dataset)
+        train_kw_accuracy = torch.zeros([e_count])
+        valid_kw_accuracy = torch.zeros([e_count])
+        
+        # valid_acc_non_exit[e_idx] = -1 if(len(dev_dataloader.dataset) - exit_count[e_idx])==0 \
+        #     else 100 * hit_non_exit[e_idx] / (len(dev_dataloader.dataset) - exit_count[e_idx])
+       
+        
+        infer_valid_acc = torch.sum(hit_exit) / len(dev_dataloader.dataset)
+        for i in range(e_count):
+            train_kw_accuracy[i] = 100.0 * (train_kw_correct[i] / len(train_dataloader.dataset))
+            valid_kw_accuracy[i] = 100.0 * (valid_kw_correct[i] / len(dev_dataloader.dataset))
+            valid_acc_exit[i] = 100 * hit_exit[i] / exit_count[i]
+            valid_exit_ratio[i] = exit_count[i] / len(dev_dataloader.dataset)
+            valid_acc_non_exit[i] = -1 if(len(dev_dataloader.dataset) - exit_count[i])==0 \
+            else 100 * hit_non_exit[i] / (len(dev_dataloader.dataset) - exit_count[i])
+        # print(output.shape)
+        # f1_scores = f1_score(labels, torch.max(output.detach(), 1)[0], average=None, )
+        # print(f1_scores)
+        print("===========================| EPOCH #{}  |===================================".format(epoch))
+        print("  | TRAIN ACC: {}%\t|  TRAIN LOSS : {:.2f} |".format(
+             train_kw_accuracy,train_loss))
+        print("  | INFER ACC: {:.2f}%\t| ".format(infer_valid_acc*100))
+        for i in range(e_count):
+            print("            EXIT {} | VAL ACC :  {:.2f}%\t ｜ Exit Ratio: {:.2f}% | Thresholds: {:.4f} |ACC_exit: {:.2f}%\t| ACC_non_exit {:.2f}%\t | VAL LOSS : {:.2f}".format(
+            i,  valid_kw_accuracy[i],valid_exit_ratio[i]*100, thresholds[i], valid_acc_exit[i],valid_acc_non_exit[i], valid_loss))
+        # print("Validation path count:   ", path_count)
+        # print("Validation set inference time:    ",total_infer_time/len(dev_dataloader.dataset))
+        print("===========================================================================")
+        ##################### 看要不要存
+        save = 0
+        for i in range(e_count):
+            if (valid_kw_accuracy[i] > previous_valid_accuracy[i]):
+                save = 1
+
+        if (save == 1):
+            previous_valid_accuracy = valid_kw_accuracy
+            print("Saving current model...")
+            model.save()
+            model.save(is_onnx=0, name='e2e_ee_{}_valacc_{:.3f}_{:.3f}_{:.3f}.pt'.format(
+                                                                    epoch, valid_kw_accuracy[0],
+                                                                                    valid_kw_accuracy[1],
+                                                                                    valid_kw_accuracy[2]))
+            # model.save(is_onnx=0,name='saved_model/w{}b{}_e_{}_valacc_{:.3f}_valloss_{:.3f}_.pt'.format(md.qw,md.qa,epoch,valid_accuracy,valid_loss))
+            # torch.save(quantized_model.state_dict(), 'saved_model/q_epoch_{}_valacc_{:.3f}_valloss_{:.3f}_.pth'.format(epoch,valid_accuracy,valid_loss))
+
+        # Update scheduler (for decaying learning rate)
+        # scheduler.step()
+
+    # Final test
+    evaluate_testset(model, dev_dataloader)
+
 
 def train_layer_wise(model, loaders, num_epoch):
     """
