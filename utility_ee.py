@@ -474,11 +474,17 @@ def train_end_to_end_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
                 [temp_thresholds[i], thresh_idxs[i]], [exit_outs[i], non_exit_outs[i]], [exit_labels[i], non_exit_labels[i]] \
                     = partition_batch(out=outs[i], label=label_kw, thresh=thresholds[i], ratio=ratio)
             # cal_loss
+            for i in range(e_count):
                 loss_exit = 0 if exit_outs[i].shape[0]==0 else criterion(exit_outs[i], exit_labels[i])
                 loss_non_exit = 0 if non_exit_outs[i].shape[0]==0 else criterion(non_exit_outs[i],non_exit_labels[i])
                 # loss = criterion(out, label_kw)
                 loss = 0.6 * loss_exit + 0.4 * loss_non_exit
-                loss.backward(retain_graph=True if i<(e_count-1) else False)
+                if(i<(e_count-1)):
+                    loss.backward(retain_graph=True)
+                else:
+                    loss.backward()
+            
+                
                 
             # loss_0 = criterion(out0, label_kw)
             # loss_1 = criterion(out1, label_kw)
@@ -507,7 +513,7 @@ def train_end_to_end_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
                      epoch, step_idx, loss,
                     optimizer.state_dict()['param_groups'][0]['lr']))
                 for i in range(e_count):
-                    print("     | ACC: {:.2f}% \t| Exit Ratio {:.2f}% \t| Threshold {:.4f}".format(
+                    print("# | ACC: {:.2f}% \t| Exit Ratio {:.2f}% \t| Threshold {:.4f}".format(
                         ba[i],thresh_idxs[i]/batch_size*100, thresholds[i])) 
             # train_kw_correct += b_hit
             step_idx += 1
@@ -595,6 +601,7 @@ def train_end_to_end_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
         # print(output.shape)
         # f1_scores = f1_score(labels, torch.max(output.detach(), 1)[0], average=None, )
         # print(f1_scores)
+
         print("===========================| EPOCH #{}  |===================================".format(epoch))
         print("  | TRAIN ACC: {}%\t|  TRAIN LOSS : {:.2f} |".format(
              train_kw_accuracy,train_loss))
@@ -605,11 +612,14 @@ def train_end_to_end_ee(model, loaders, num_epoch,ratios=[0.5,0.8,1]):
         # print("Validation path count:   ", path_count)
         # print("Validation set inference time:    ",total_infer_time/len(dev_dataloader.dataset))
         print("===========================================================================")
+        # for i in range(e_count):
+        #     del exit_outs[i],exit_labels[i], non_exit_outs[i], non_exit_labels[i]
+        
         ##################### 看要不要存
         save = 0
-        for i in range(e_count):
-            if (valid_kw_accuracy[i] > previous_valid_accuracy[i]):
-                save = 1
+        # for i in range(e_count):
+        if (valid_kw_accuracy[2] > previous_valid_accuracy[2]):
+            save = 1
 
         if (save == 1):
             previous_valid_accuracy = valid_kw_accuracy
